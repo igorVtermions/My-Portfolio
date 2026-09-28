@@ -1,0 +1,138 @@
+@media (min-width: 701px) and (max-width: 900px) {
+  .identity {
+    gap: 28px;
+  }
+  .identity h1 {
+    font-size: 78px;
+    letter-spacing: -5px;
+  }
+  .identity .actions {
+    gap: var(--space-1);
+  }
+}
+@media (max-width: 700px) {
+  .identity {
+    grid-template-columns: 1fr;
+    gap: var(--space-5);
+    padding-top: 28px;
+    margin-bottom: 30px;
+  }
+  .identity h1 {
+    font-size: min(72px, 18.5vw);
+    line-height: 0.9;
+    letter-spacing: -4.5px;
+    margin-top: 18px;
+  }
+  .identity-note {
+    gap: 22px;
+    margin-top: 22px;
+  }
+  .identity-note p {
+    font-size: 20px;
+  }
+  .identity-body {
+    font-size: 14px;
+    margin-top: 19px;
+  }
+  .identity .actions {
+    gap: 14px;
+  }
+  .identity .action-secondary {
+    font-size: 11px;
+    gap: 5px;
+  }
+  .stack-ribbon {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 9px 15px;
+    font-size: 8px;
+    margin-bottom: var(--space-6);
+  }
+  .stack-ribbon li {
+    flex: none;
+    gap: 15px;
+  }
+  .stack-ribbon li:not(:last-child)::after {
+    font-size: 12px;
+  }
+  .home-about {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    padding-top: 28px;
+  }
+  .home-about h2 {
+    font-size: 33px;
+  }
+  .about-signature {
+    margin-top: 18px;
+  }
+  .about-story .lead {
+    font-size: 19px;
+  }
+  .stack-section h2 {
+    font-size: 31px;
+  }
+  .stack-grid {
+    grid-template-columns: 1fr;
+    margin-top: 22px;
+  }
+  .stack-group {
+    padding: 23px;
+  }
+  .stack-title h3 {
+    font-size: 20px;
+  }
+  .repository-index h2 {
+    font-size: 26px;
+  }
+  .repository-row {
+    grid-template-columns: 1fr auto;
+    gap: 8px 14px;
+    padding: 20px 0;
+  }
+  .repository-description {
+    grid-column: 1;
+    grid-row: 2;
+    font-size: 11px;
+  }
+  .repository-language {
+    grid-column: 1;
+    grid-row: 3;
+  }
+  .repository-row .icon {
+    grid-column: 2;
+    grid-row: 1 / 4;
+    width: 18px;
+  }
+  .contact-strip {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .contact-strip h2 {
+    font-size: 34px;
+  }
+  .direct-contact {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+  }
+  .direct-contact h3,
+  .phone {
+    font-size: 29px;
+  }
+  .direct-contact .actions {
+    gap: var(--space-2);
+    flex-direction: column;
+  }
+}
+@media (max-width: 360px) {
+  .identity-note {
+    gap: 12px;
+  }
+  .identity-note p {
+    font-size: 18px;
+  }
+  .identity .actions {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}

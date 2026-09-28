@@ -1,0 +1,99 @@
+@import "tailwindcss";
+@import "../styles/tokens.css";
+@import "../styles/primitives.css";
+@import "../styles/layout.css";
+@import "../styles/home.css";
+@import "../styles/home-responsive.css";
+@import "../styles/projects.css";
+@import "../styles/projects-responsive.css";
+@import "../styles/pages.css";
+
+* {
+  box-sizing: border-box;
+}
+html {
+  color-scheme: dark;
+  scroll-behavior: smooth;
+}
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--foreground);
+  font: 16px / var(--leading-body) var(--font-body);
+}
+h1,
+h2,
+h3,
+p,
+figure {
+  margin: 0;
+}
+h1,
+h2,
+h3 {
+  font-weight: var(--weight-heading);
+  line-height: var(--leading-heading);
+}
+h2 {
+  font-size: 34px;
+  letter-spacing: var(--tracking-heading);
+}
+h3 {
+  font-size: 22px;
+  letter-spacing: -0.02em;
+}
+p {
+  color: var(--muted);
+}
+em {
+  color: var(--accent-soft);
+  font-style: normal;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+button {
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+a,
+button {
+  transition:
+    color var(--motion-fast),
+    background-color var(--motion-fast),
+    border-color var(--motion-fast);
+}
+:focus-visible {
+  outline: var(--focus-width) solid var(--accent-soft);
+  outline-offset: var(--focus-offset);
+}
+main:focus,
+section[tabindex]:focus {
+  outline: none;
+}
+section[tabindex] {
+  scroll-margin-top: var(--space-4);
+}
+::selection {
+  background: var(--accent-soft);
+  color: var(--background);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
