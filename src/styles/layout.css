@@ -29,7 +29,6 @@
 .desktop-nav a:hover,
 .desktop-nav a:focus-visible {
   color: var(--foreground);
-  box-shadow: 0 1px var(--accent-soft);
 }
 .menu-toggle {
   display: none;
@@ -39,7 +38,7 @@
   inset: 0;
   z-index: var(--layer-overlay);
   background: var(--overlay);
-  animation: backdrop-enter 180ms ease-out;
+  animation: backdrop-enter var(--motion-fast) ease-out;
 }
 .menu-panel {
   position: fixed;
@@ -92,10 +91,6 @@
   border-bottom: 1px solid var(--border);
   font-size: 22px;
   letter-spacing: -0.6px;
-}
-.panel-item > span {
-  font: 10px var(--font-mono);
-  color: var(--muted);
 }
 .panel-item .icon {
   margin-left: auto;

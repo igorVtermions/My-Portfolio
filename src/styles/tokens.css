@@ -42,14 +42,14 @@
   --layer-overlay: 10;
   --layer-dialog: 11;
   --menu-width: 440px;
-  --motion-fast: 160ms;
-  --motion-base: 280ms;
-  --motion-reveal: 450ms;
-  --motion-hero: 500ms;
-  --motion-stagger: 45ms;
+  --motion-fast: 200ms;
+  --motion-base: 320ms;
+  --motion-reveal: 600ms;
+  --motion-hero: 650ms;
+  --motion-stagger: 65ms;
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
-  --distance-small: 6px;
-  --distance-base: 12px;
+  --distance-small: 12px;
+  --distance-base: 24px;
 }
 
 @theme inline {

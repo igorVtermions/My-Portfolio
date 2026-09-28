@@ -7,15 +7,15 @@ import { ProjectArt } from "./project-art";
 
 export function ProjectCase({ project }: { project: Project }) {
   const sections = [
-    { label: "01 / Contexto", title: project.name, body: project.context },
+    { label: "Contexto", title: project.name, body: project.context },
     {
-      label: "02 / Minha contribuição",
+      label: "Minha contribuição",
       title: "Onde entrei no trabalho.",
       body: project.contribution,
     },
-    { label: "03 / Tecnologia", title: "As peças da construção.", body: null },
+    { label: "Tecnologia", title: "As peças da construção.", body: null },
     {
-      label: "04 / Estado atual",
+      label: "Estado atual",
       title: "O que existe hoje.",
       body: project.currentState,
     },

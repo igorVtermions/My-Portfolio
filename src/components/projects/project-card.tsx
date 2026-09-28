@@ -15,10 +15,7 @@ export function ProjectCard({
     return (
       <article className="feature-project">
         <div className="feature-copy">
-          <span className="project-number" aria-hidden="true">
-            01
-          </span>
-          <p className="eyebrow">Produto autoral</p>
+          <p className="eyebrow">{project.role}</p>
           <h3>
             {project.name}
             <em>.</em>
@@ -47,16 +44,9 @@ export function ProjectCard({
   );
 }
 
-export function ProjectRow({
-  project,
-  number,
-}: {
-  project: Project;
-  number: string;
-}) {
+export function ProjectRow({ project }: { project: Project }) {
   return (
     <Link href={project.href} className="project-row">
-      <span>{number}</span>
       <div>
         <strong>{project.name}</strong>
         <small>{project.role}</small>

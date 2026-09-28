@@ -1,0 +1,77 @@
+.action {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  transition:
+    color 350ms,
+    border-color var(--motion-fast),
+    transform var(--motion-fast) var(--ease-out);
+}
+.action > * {
+  position: relative;
+  z-index: var(--layer-elevated);
+}
+button.action > .action-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 24px;
+}
+.action-primary::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: var(--accent-soft);
+  transform: translateX(-102%);
+  transition: transform 450ms var(--ease-out);
+}
+.action-primary:is(:hover, :focus-visible)::before {
+  transform: translateX(0);
+}
+.action-primary:is(:hover, :focus-visible) {
+  color: var(--background);
+  border-color: var(--accent-soft);
+}
+.action-secondary::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 4px;
+  height: 1px;
+  background: var(--accent-soft);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--motion-base) var(--ease-out);
+}
+.action-secondary:is(:hover, :focus-visible)::after {
+  transform: scaleX(1);
+}
+.action:is(:hover, :focus-visible) .icon {
+  transform: translate(5px, -2px);
+}
+.action:active {
+  transform: scale(0.97);
+}
+.project-row,
+.repository-row {
+  transition:
+    background-color var(--motion-base),
+    color var(--motion-fast);
+}
+.project-row:is(:hover, :focus-visible),
+.repository-row:is(:hover, :focus-visible) {
+  background: var(--surface);
+}
+.project-row:is(:hover, :focus-visible) .icon,
+.repository-row:is(:hover, :focus-visible) .icon {
+  transform: translate(5px, -3px);
+}
+@media (prefers-reduced-motion: reduce) {
+  .action:active,
+  .action:is(:hover, :focus-visible) .icon,
+  .project-row:is(:hover, :focus-visible) .icon,
+  .repository-row:is(:hover, :focus-visible) .icon {
+    transform: none;
+  }
+}

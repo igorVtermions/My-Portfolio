@@ -1,0 +1,94 @@
+.technology-marquee {
+  margin: 36px 0 var(--section-space);
+  position: relative;
+}
+.marquee-window {
+  overflow: hidden;
+  padding-block: 24px;
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: technology-scroll var(--marquee-duration, 40s) linear infinite;
+  animation-play-state: paused;
+}
+.marquee-group {
+  display: flex;
+  width: max(100vw, 800px);
+  flex-shrink: 0;
+}
+.marquee-group > span {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex: 1;
+  gap: 24px;
+  color: var(--foreground);
+  font-size: clamp(18px, 2.2vw, 30px);
+  font-weight: 600;
+  white-space: nowrap;
+}
+.marquee-group i {
+  font-style: normal;
+  font-weight: 400;
+  color: var(--accent-soft);
+}
+.technology-marquee[data-running="true"] .marquee-track {
+  animation-play-state: running;
+}
+.marquee-control {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 44px;
+  margin-left: auto;
+  padding: 8px 0 8px 16px;
+  border: 0;
+  background: none;
+  color: var(--muted);
+  font: 11px var(--font-mono);
+}
+.marquee-control:hover {
+  color: var(--accent-soft);
+}
+.technology-marquee[data-ready="false"] .marquee-group {
+  width: auto;
+  flex: 1;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.technology-marquee[data-ready="false"] .marquee-track {
+  width: 100%;
+}
+.technology-marquee[data-ready="false"] .marquee-group:nth-child(2) {
+  display: none;
+}
+.technology-marquee[data-ready="false"] .marquee-control {
+  visibility: hidden;
+}
+@keyframes technology-scroll {
+  to {
+    transform: translateX(-50%);
+  }
+}
+/* A escolha explícita de reproduzir permite movimento somente nesta faixa. */
+.technology-marquee[data-enabled="false"] {
+  .marquee-track {
+    animation: none;
+    width: 100%;
+    transform: none;
+  }
+  .marquee-group {
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .marquee-group > span {
+    flex: 1 1 auto;
+    font-size: 18px;
+  }
+  .marquee-group:nth-child(2) {
+    display: none;
+  }
+}

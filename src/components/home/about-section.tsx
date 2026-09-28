@@ -6,7 +6,7 @@ export function AboutSection() {
   return (
     <Section id="sobre" className="home-about">
       <Reveal>
-        <p className="eyebrow">02 / Sobre mim</p>
+        <p className="eyebrow">Sobre mim</p>
         <h2 id="sobre-title">
           Sou Igor.
           <br />

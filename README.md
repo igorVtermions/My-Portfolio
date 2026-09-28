@@ -42,7 +42,7 @@ Os casos distinguem contexto, contribuição, tecnologias e estado atual. A foto
 - **Apresentação pessoal:** nome, fotografia, foco profissional e acesso aos projetos e à história completa.
 - **Sobre mim na home:** trajetória e contexto profissional disponíveis na própria página inicial.
 - **Stack completa:** oito grupos de tecnologias e práticas, incluindo notas sobre formação complementar e recursos em desenvolvimento.
-- **Seleção de trabalhos:** destaque para o Escoply e linhas dedicadas às experiências profissionais.
+- **Seleção de trabalhos:** carrossel com os três casos, troca automática a cada 6,5 segundos e controles de navegação e pausa.
 - **Filtros de projetos:** Todos, Autoral e Profissional, com contagens de 3, 1 e 2 casos.
 - **Páginas de caso:** contexto, contribuição, tecnologias e estado de cada trabalho.
 - **Código público:** links diretos para os repositórios apresentados.
@@ -52,7 +52,7 @@ Os casos distinguem contexto, contribuição, tecnologias e estado atual. A foto
 - **Animações:** revelações de conteúdo, transições de filtros e respostas de interação com suporte a movimento reduzido.
 - **Página 404:** tratamento de endereços e projetos inexistentes com retorno à home.
 
-O escopo atual não inclui autenticação, banco de dados, CMS ou formulário de mensagens. E-mail e WhatsApp abrem os canais correspondentes; o site não envia mensagens automaticamente.
+O formulário da home envia mensagens pelo servidor usando Resend. Telefone e WhatsApp ficam na página dedicada de contato; foram removidos da home e do footer. O escopo não inclui autenticação, banco de dados ou CMS.
 
 ## Projetos apresentados
 
@@ -72,7 +72,7 @@ Thux/Mathux é apresentada como experiência profissional, não como um produto 
 | [escoply-mobile](https://github.com/igorVtermions/escoply-mobile) | Frente mobile do produto autoral | TypeScript            |
 | [Master-Manager](https://github.com/igorVtermions/Master-Manager) | Repositório fixado no perfil     | JavaScript            |
 
-A lista é mantida localmente. A aplicação não consulta a API do GitHub a cada visita e não precisa de token de acesso.
+A home e a listagem consultam a API pública do GitHub no servidor, com revalidação de uma hora. São exibidos até seis repositórios próprios, públicos e não arquivados, ordenados pelo último push. Forks são excluídos. A tabela acima documenta a seleção local usada quando a API fica indisponível. Não é necessário token.
 
 ## Tecnologias
 
@@ -133,7 +133,9 @@ npm run build
 npm start
 ```
 
-`npm start` exige um build gerado previamente. O projeto não requer variáveis de ambiente ou serviços externos para funcionar no escopo atual.
+`npm start` exige um build gerado previamente. Para ativar o envio de mensagens, copie `.env.example` para `.env.local` e configure `RESEND_API_KEY` e `CONTACT_FROM_EMAIL`, usando um remetente de domínio verificado no Resend. Na hospedagem, configure os mesmos valores como segredos do servidor. Nunca use o prefixo `NEXT_PUBLIC_` para a chave.
+
+O destinatário vem de `src/content/profile.ts`; o e-mail do visitante é usado como `reply_to`. Sem configuração, a API retorna indisponibilidade e o formulário preserva a mensagem. A confirmação só aparece quando o provedor aceita o envio; isso não garante entrega na caixa de entrada. Há validação no servidor, honeypot e limite de cinco tentativas por dez minutos por IP. O limite é local ao processo: em múltiplas instâncias, deve ser substituído por armazenamento compartilhado ou regra de proteção na hospedagem. O proxy de produção deve sobrescrever `x-forwarded-for`.
 
 ## Comandos disponíveis
 
@@ -234,7 +236,7 @@ O menu utiliza Radix Dialog para contenção e restauração de foco, fechamento
 
 Os filtros usam `aria-pressed` e anunciam a contagem resultante. Itens em saída ficam `inert` para não permanecerem no percurso de foco. O clipboard anuncia sucesso ou falha em uma região de status.
 
-As animações usam Motion e CSS, com parâmetros compartilhados em [motion-tokens.ts](src/lib/motion-tokens.ts). `MotionConfig` e `useReducedMotion`, junto das regras CSS, respeitam `prefers-reduced-motion`. O texto inicial não começa invisível esperando a animação, e o conteúdo principal permanece legível sem JavaScript.
+As animações usam Motion e CSS, com parâmetros compartilhados em [motion-tokens.ts](src/lib/motion-tokens.ts). O hook `useMotionPreference` usa um snapshot estável para servidor e hidratação. Por solicitação do autor, a faixa de tecnologias e o carrossel de projetos iniciam automaticamente, inclusive com movimento reduzido, e mantêm controles de pausa. Hover e seleção manual não interrompem a reprodução; ela é suspensa fora da tela ou com a aba oculta. Os demais efeitos respeitam a preferência do sistema. A demonstração de contato alterna código e interface; com movimento reduzido, apresenta a interface estática. O conteúdo principal permanece legível sem JavaScript.
 
 ## Testes e validação
 
@@ -247,7 +249,7 @@ npm run build
 npm test
 ```
 
-A configuração Playwright usa `http://127.0.0.1:3000`, dois workers e Microsoft Edge (`channel: "msedge"`). O servidor de produção é iniciado automaticamente para os testes; fora de CI, um servidor existente pode ser reutilizado. Para testar um build específico, encerre o servidor anterior antes da execução.
+A configuração Playwright usa `http://127.0.0.1:3100`, dois workers e Microsoft Edge (`channel: "msedge"`). Os testes iniciam um servidor de produção isolado, sem reutilizar o servidor de desenvolvimento. Os testes de sucesso e falha do formulário simulam o provedor no navegador e não enviam e-mails reais.
 
 **Configuração fora do Windows:** o comando de servidor em `playwright.config.ts` usa `npm.cmd`. Em Linux ou macOS, ajuste para `npm run start -- --hostname 127.0.0.1`. Se optar pelo Chromium do Playwright, remova `channel: "msedge"` e instale o navegador com `npx playwright install chromium`. O script de revisão visual também seleciona Edge explicitamente.
 
@@ -305,7 +307,7 @@ O `.gitignore` exclui dependências, build, caches, resultados de testes, captur
 - Casos conhecidos pré-renderizados por `generateStaticParams`.
 - Fotografia entregue por `next/image`, com dimensões, `sizes` e preload quando acima da dobra.
 - Fontes de sistema, sem download de famílias tipográficas externas.
-- Dados locais, sem requisições de API para montar o conteúdo.
+- Conteúdo editorial local e repositórios do GitHub com cache no servidor.
 - Conteúdo inicial legível antes da hidratação.
 
 O domínio de produção ainda não está configurado. Canonical, sitemap e regras de robots devem ser definidos quando o endereço real estiver disponível. Não há URL fictícia de produção no projeto.

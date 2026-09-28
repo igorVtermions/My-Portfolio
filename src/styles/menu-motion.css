@@ -1,0 +1,50 @@
+.menu-panel[data-state="closed"] {
+  animation: panel-exit var(--motion-fast) var(--ease-out);
+  pointer-events: none;
+}
+.menu-overlay[data-state="closed"] {
+  animation: backdrop-exit var(--motion-fast) ease-out;
+  pointer-events: none;
+}
+.menu-panel[data-navigating="true"][data-state="closed"] {
+  animation: none;
+}
+.menu-panel[data-state="open"] .panel-item {
+  animation: menu-item-enter var(--motion-base) var(--ease-out) both;
+}
+.panel-item:nth-child(2) {
+  animation-delay: 30ms;
+}
+.panel-item:nth-child(3) {
+  animation-delay: 60ms;
+}
+.panel-item:nth-child(4) {
+  animation-delay: 90ms;
+}
+.panel-item:nth-child(5) {
+  animation-delay: 120ms;
+}
+.panel-item:nth-child(6) {
+  animation-delay: 150ms;
+}
+@keyframes panel-exit {
+  to {
+    transform: translateX(24px);
+    opacity: 0;
+  }
+}
+@keyframes backdrop-exit {
+  to {
+    opacity: 0;
+  }
+}
+@keyframes menu-item-enter {
+  from {
+    transform: translateX(12px);
+    opacity: 0.65;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}

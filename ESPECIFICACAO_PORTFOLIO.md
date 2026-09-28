@@ -154,7 +154,7 @@ Ações: “Explorar projetos” para `/projetos` e “Quem está por trás” p
 
 A fotografia deve ter moldura retangular, detalhe roxo deslocado e legenda lilás. Monograma IF na margem inferior, sem cobrir o rosto. Preservar proporção e cores naturais. Sem tratamento que altere traços faciais.
 
-Faixa de tecnologias: React Native, TypeScript, React/Next.js e Node.js. Não transformar em carrossel ou marquee que esconda itens.
+Faixa de tecnologias: React Native, TypeScript, React/Next.js e Node.js. Implementar faixa horizontal contínua com pausa manual, pausa por hover/foco e suspensão fora da viewport e com aba oculta. Com movimento reduzido ou sem JavaScript, todos os itens ficam legíveis em apresentação estática.
 
 ### 6.3 Sobre mim
 
@@ -174,7 +174,7 @@ Ação “Minha trajetória completa” leva a `/sobre`. Não substituir esse co
 
 Título: “As ferramentas por trás das entregas.” Subtexto: “Do aplicativo à infraestrutura. Minha base de trabalho e estudo.”
 
-Grade de duas colunas no desktop e uma no mobile. Oito grupos, todos visíveis, sem depender de hover ou abrir acordeões. Categorias numeradas, descrição curta e etiquetas de tecnologia.
+Grade de duas colunas no desktop e uma no mobile. Oito grupos, todos visíveis, sem depender de hover ou abrir acordeões. Categorias sem numeração decorativa, descrição curta e etiquetas de tecnologia.
 
 | Grupo | Itens obrigatórios |
 |---|---|
@@ -195,7 +195,7 @@ Etiquetas são conteúdo, não controles. Não lhes dar `tabindex`, aparência d
 
 Escoply é o destaque, com texto e composição em colunas, status “Em construção”, etiquetas Web + mobile e link do caso. No mobile, texto antes da composição.
 
-Mágicos da Limpeza e Thux/Mathux aparecem depois em linhas numeradas com descrição breve e seta. Manter alvos clicáveis claros. Não duplicar links aninhados dentro de um card inteiramente clicável.
+Mágicos da Limpeza e Thux/Mathux aparecem depois em linhas sem numeração decorativa com descrição breve e seta. Manter alvos clicáveis claros. Não duplicar links aninhados dentro de um card inteiramente clicável.
 
 Não transformar toda a seção em uma grade de cards idênticos. O destaque do Escoply faz parte da hierarquia.
 
@@ -333,7 +333,7 @@ GitHub, LinkedIn e WhatsApp podem continuar como textos com seta externa. Não s
 
 Acionador com texto “Menu”, ícone, nome acessível e `aria-expanded`. Painel escuro, fundo externo atenuado, largura de até 440 px limitada à viewport menos 24 px, margem de 12 px e altura máxima `calc(100dvh - 24px)`.
 
-Entradas numeradas: Início, Projetos, Sobre mim, Minha stack, Minha história e Contato. Destinos de seção usam hashes da home. Rodapé do painel contém WhatsApp, telefone e e-mail.
+Entradas sem numeração decorativa: Início, Projetos, Sobre mim, Minha stack, Minha história e Contato. Destinos de seção usam hashes da home. Rodapé do painel contém WhatsApp, telefone e e-mail.
 
 Comportamentos obrigatórios:
 
@@ -390,40 +390,22 @@ Todos os parâmetros a seguir são decisões propostas para este projeto, não v
 
 ### 11.1 Tokens de movimento
 
-| Token | Valor de referência | Uso |
-|---|---|---|
-| `motion-fast` | 140 a 180 ms | Hover, seta e feedback simples |
-| `motion-base` | 240 a 320 ms | Filtros e painel |
-| `motion-reveal` | 400 a 500 ms | Entrada de seção |
-| `motion-hero` | Até 600 ms | Composição inicial completa |
-| `motion-stagger` | 40 a 60 ms | Sequência curta de grupos |
-| `ease-out` | `[0.22, 1, 0.36, 1]` | Entrada suave |
-| `distance-small` | 6 a 8 px | Mobile e microinterações |
-| `distance-base` | 12 a 16 px | Entrada desktop |
+Revisão aprovada por Igor: resposta de 200 ms, transição base de 320 ms, revelação de 600 ms, composição inicial de até 650 ms, stagger de 65 ms limitado a 240 ms por grupo. Curva [0.22, 1, 0.36, 1]. Deslocamentos de até 24 px no desktop e 12 px no celular. Conteúdo inicial legível antes da hidratação.
 
-Não usar atraso acumulado acima de 300 ms para alcançar um elemento importante. Limitar stagger por grupo visível, não pelo índice absoluto de uma lista longa. Entradas ocorrem uma vez por montagem/visita; não repetir a cada pequena oscilação de scroll.
+### 11.2 Mapa de movimento revisado
 
-### 11.2 Mapa de inserção das animações
-
-| Local | Gatilho e efeito | Parâmetros | Mobile e movimento reduzido |
-|---|---|---|---|
-| Cabeçalho | Sublinhado de link e cor da marca no hover/foco | 160 ms, sem deslocar layout | Mesmo foco; sem depender de hover |
-| Nome da abertura | Assentamento curto da composição, mantendo texto legível desde o início | Até 8 px, 450 ms; sem soletrar letras | Até 4 px; estático com redução |
-| Foto e moldura | Moldura entra em relação à foto estática | 12 px para 0, 500 ms | 6 px; estática com redução |
-| Botões | Cor e seta deslocada no hover/foco; pequena resposta ao pressionar | Seta até 3 px, 160 ms; escala mínima 0,98 | Feedback de toque; sem escala com redução |
-| Sobre mim | Título e texto aparecem em sequência curta ao entrar na viewport | 12 px, 420 ms, intervalo 60 ms | 6 px; conteúdo imediatamente visível com redução |
-| Grupos de stack | Revelação por linha de grupos, uma vez | 12 px, 400 ms, intervalo 45 ms | Um grupo por vez, 6 px; sem stagger com redução |
-| Etiquetas de stack | Ajuste sutil de cor da borda ao hover, sem movimento | 160 ms | Estáticas no touch; não se tornam botões |
-| Escoply destacado | Entrada do bloco e enquadramento conceitual | 12 px, 450 ms; hover da imagem até escala 1,015 | Sem zoom hover; estático com redução |
-| Linhas profissionais | Seta e realce de fundo no hover/foco | 3 px, 160 ms | Estado de toque e foco |
-| Filtros | Saída curta e reorganização dos itens restantes | Saída 120 ms, layout 240 ms | Sem transform com redução, atualização imediata |
-| Repositórios | Seta externa e sublinhado do nome | 160 ms | Sem deslocamento com redução |
-| Linha do tempo | Marco realça ao entrar na viewport | Opacidade e cor, 300 ms | Sem pinning nem scroll obrigatório |
-| Contatos | Entrada discreta da área completa | 8 px, 350 ms | Sem atraso nos links; estático com redução |
-| Copiar e-mail | Troca entre copiar e check acompanhada de texto de status | 140 ms, estado por cerca de 2 s | Mensagem permanece acessível; sem movimento necessário |
-| Menu mobile | Backdrop aparece; painel desliza a partir da direita | Backdrop 180 ms, painel 280 ms; saída 180 ms | Com redução, abertura imediata ou fade de até 100 ms |
-| Itens do menu | Sequência curta ao abrir, nunca obrigatória para clicar | 30 ms entre itens, limite 150 ms | Sem stagger com redução |
-| Entrada de rota | Revelação leve do conteúdo secundário após navegação | 180 a 240 ms, sem tela de espera | Sem transição com redução |
+- Abertura com entrada coordenada de nome, texto, ações e moldura.
+- Botões com preenchimento animado, seta de até 5 px e resposta ao pressionar. Links com sublinhado animado e foco equivalente.
+- Faixa de tecnologias em movimento contínuo a 32 px/s, com controle de pausa e alternativas estáticas acessíveis.
+- Seções principais com separadores consistentes e revelação da linha uma vez na viewport.
+- Sobre mim, grupos de stack, linhas profissionais e repositórios com entradas escalonadas.
+- Fotografia e composição conceitual com deslocamento de até 10 px vinculado à rolagem no desktop; estáticos no mobile.
+- Filtros com indicador deslizante, entrada, saída e reorganização; itens removidos ficam inert.
+- Linha do tempo com marco ativo e progressão pela rolagem.
+- Contatos com entrada coordenada; clipboard com troca de ícone e status textual.
+- Menu com entrada e saída do painel e fundo, sequência curta nos links e navegação imediata. Nenhum elemento em saída pode receber interação.
+- Entrada leve na navegação de rotas, sem bloquear conteúdo nem links.
+- Reduced motion remove deslocamentos, loops e stagger. Todas as informações continuam acessíveis.
 
 ### 11.3 Implementação das animações
 
@@ -445,7 +427,7 @@ Com `prefers-reduced-motion: reduce`, retirar deslocamentos, escala, stagger, sc
 
 ### 11.5 Efeitos fora da direção aprovada
 
-Não inserir partículas, fundos WebGL, holofotes seguindo o mouse, brilho neon, gradientes animados, cursores magnéticos, rolagem horizontal forçada, carrossel automático, letras embaralhadas, typewriter ou contadores de resultados.
+Não inserir partículas, fundos WebGL, holofotes seguindo o mouse, brilho neon, gradientes animados, cursores magnéticos, rolagem horizontal forçada, letras embaralhadas, typewriter ou contadores de resultados.
 
 A autorização atual permite enriquecer o movimento nos pontos especificados. Não autoriza trocar a identidade por um conjunto de efeitos de biblioteca. Novas experiências visuais que alterem a composição dependem de pedido de Igor.
 
@@ -809,3 +791,13 @@ Após uma mudança compartilhada, revisar os consumidores afetados. Rodar typech
 - [ ] Refatorações preservam fielmente o design e a ordem de seções.
 
 Registro desta ampliação: Igor solicitou explicitamente design system, componentização para evitar arquivos gigantes, Clean Code e boas práticas. Essas exigências passam a integrar o contrato obrigatório de desenvolvimento.
+
+## 21. Revisão aprovada: movimento e limpeza visual
+
+Igor aprovou o plano em docs/plano-evolucao-visual.md: remover numeração ornamental de seções, cards, categorias e menu; padronizar linhas de separação; aumentar a presença das animações e colocar a faixa de tecnologias em movimento. Datas, telefone, contagens e código 404 são preservados. Esta revisão substitui a direção anterior de faixa estática e as amplitudes antigas do mapa de movimento.
+
+### Ajustes solicitados após a revisão visual
+
+Revisão posterior: o autor solicitou reprodução automática dos dois carrosséis mesmo com movimento reduzido, sem interrupção por hover ou seleção manual. Manter pausa explícita e suspensão fora da viewport/aba oculta. Remover notas complementares da stack e frases indicadas no contato. Apresentar repositórios em cards e substituir a assinatura “Vamos tirar do papel” por uma demonstração de código se transformando em interface. Esta revisão prevalece sobre as regras de reprodução anteriores.
+
+Esta orientação substitui os trechos anteriores conflitantes: stack com ícones de tecnologias, sem o aviso geral sobre níveis de experiência; carrossel real de projetos; repositórios recentes via GitHub; formulário com envio direto pelo servidor; remoção do bloco de telefone e WhatsApp na home e no rodapé. A página dedicada de contato mantém seus canais. Não exibir o texto técnico “Movimento reduzido”. Respeitar a preferência do sistema no início e permitir reprodução explícita dos carrosséis. Servidor e primeira renderização do cliente devem produzir conteúdo idêntico. Hovers precisam de transições tanto na entrada quanto na saída.

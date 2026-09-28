@@ -1,5 +1,5 @@
 import { timeline } from "@/content/timeline";
-import { Reveal } from "@/components/motion/reveal";
+import { TimelineEntry } from "./timeline-entry";
 
 export function ExperienceTimeline() {
   return (
@@ -7,13 +7,13 @@ export function ExperienceTimeline() {
       <ol className="timeline">
         {timeline.map((item) => (
           <li key={item.title}>
-            <Reveal className="timeline-item">
+            <TimelineEntry>
               <span className="eyebrow">{item.period}</span>
               <div>
                 <h3>{item.title}</h3>
                 <p>{item.description}</p>
               </div>
-            </Reveal>
+            </TimelineEntry>
           </li>
         ))}
       </ol>

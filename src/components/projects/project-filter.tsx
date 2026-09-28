@@ -1,12 +1,8 @@
 "use client";
+import { useMotionPreference } from "@/components/motion/use-motion-preference";
 
 import { useState } from "react";
-import {
-  AnimatePresence,
-  motion,
-  useIsPresent,
-  useReducedMotion,
-} from "motion/react";
+import { AnimatePresence, motion, useIsPresent } from "motion/react";
 import {
   projects,
   type Project,
@@ -19,12 +15,12 @@ const categories = ["Todos", "Autoral", "Profissional"] as const;
 
 function FilteredProject({ project }: { project: Project }) {
   const present = useIsPresent();
-  const reduced = useReducedMotion();
+  const reduced = useMotionPreference();
   return (
     <motion.div
       layout={!reduced}
-      initial={false}
-      animate={{ opacity: 1 }}
+      initial={reduced ? false : { opacity: 0.3, y: 18 }}
+      animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0 }}
       transition={{ duration: reduced ? 0 : motionTokens.base }}
       inert={!present}
@@ -35,6 +31,7 @@ function FilteredProject({ project }: { project: Project }) {
 }
 
 export function ProjectFilter() {
+  const reduced = useMotionPreference();
   const [selectedCategory, setSelectedCategory] = useState<
     ProjectCategory | "Todos"
   >("Todos");
@@ -52,6 +49,16 @@ export function ProjectFilter() {
             aria-pressed={selectedCategory === category}
             onClick={() => setSelectedCategory(category)}
           >
+            {selectedCategory === category && (
+              <motion.span
+                className="filter-indicator"
+                layoutId={reduced ? undefined : "project-filter-indicator"}
+                transition={{
+                  duration: reduced ? 0 : motionTokens.base,
+                  ease: motionTokens.ease,
+                }}
+              />
+            )}
             {category}{" "}
             <sup>
               {

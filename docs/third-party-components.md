@@ -13,4 +13,6 @@ Não foi copiado código de templates, Magic UI ou outros catálogos. Componente
 
 O verificador `@axe-core/playwright` 4.13.0, licença MPL-2.0, é usado apenas nos testes de acessibilidade. Origem: https://github.com/dequelabs/axe-core-npm.
 
+Simple Icons 16.33.0 fornece os SVGs das tecnologias, importados nominalmente. Origem: https://simpleicons.org. O pacote usa CC0-1.0; marcas e orientações individuais continuam pertencendo aos seus titulares. Conceitos sem marca usam símbolos tipográficos locais.
+
 As licenças dos pacotes instalados permanecem em `node_modules` e suas versões exatas em `package-lock.json`. Nenhuma biblioteca fornece a identidade visual; todos os estilos seguem o design local. GSAP não foi instalado porque os efeitos implementados não precisam de um segundo motor.

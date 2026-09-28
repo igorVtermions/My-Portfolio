@@ -1,21 +1,24 @@
+import { TechnologyIcon } from "@/components/ui/technology-icon";
 import { stack, type StackCategory } from "@/content/stack";
-import { Section, SectionHeading, Tags } from "@/components/ui/primitives";
-import { Reveal } from "@/components/motion/reveal";
-import { motionTokens } from "@/lib/motion-tokens";
+import { Section, SectionHeading } from "@/components/ui/primitives";
+import { StaggerGroup } from "@/components/motion/stagger-group";
 
-function StackGroup({ group, index }: { group: StackCategory; index: number }) {
+function StackGroup({ group }: { group: StackCategory }) {
   return (
-    <Reveal className="stack-group" delay={(index % 2) * motionTokens.stagger}>
-      <article>
-        <div className="stack-title">
-          <span>{String(index + 1).padStart(2, "0")}</span>
-          <h3>{group.title}</h3>
-        </div>
-        <p>{group.description}</p>
-        <Tags items={group.items} />
-        {group.note && <small>{group.note}</small>}
-      </article>
-    </Reveal>
+    <article className="stack-group">
+      <div className="stack-title">
+        <h3>{group.title}</h3>
+      </div>
+      <p>{group.description}</p>
+      <ul className="technology-list">
+        {group.items.map((item) => (
+          <li key={item}>
+            <TechnologyIcon name={item} />
+            <span>{item}</span>
+          </li>
+        ))}
+      </ul>
+    </article>
   );
 }
 
@@ -24,7 +27,7 @@ export function StackSection() {
     <Section id="stack" className="stack-section">
       <SectionHeading
         id="stack-title"
-        eyebrow="03 / Minha stack"
+        eyebrow="Minha stack"
         title={
           <>
             As ferramentas
@@ -32,23 +35,12 @@ export function StackSection() {
             por trás das entregas.
           </>
         }
-        description={
-          <>
-            Do aplicativo à infraestrutura.
-            <br />
-            Minha base de trabalho e estudo.
-          </>
-        }
       />
-      <div className="stack-grid">
-        {stack.map((group, index) => (
-          <StackGroup key={group.title} group={group} index={index} />
+      <StaggerGroup className="stack-grid">
+        {stack.map((group) => (
+          <StackGroup key={group.title} group={group} />
         ))}
-      </div>
-      <p className="note">
-        Tecnologias e práticas do currículo, incluindo formação complementar. A
-        lista não representa o mesmo nível de experiência em todos os itens.
-      </p>
+      </StaggerGroup>
     </Section>
   );
 }

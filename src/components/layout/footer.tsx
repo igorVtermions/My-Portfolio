@@ -9,9 +9,6 @@ export function Footer() {
         <ActionLink href={profile.github}>GitHub</ActionLink>
         <ActionLink href={profile.linkedin}>LinkedIn</ActionLink>
       </div>
-      <a href={profile.whatsapp} target="_blank" rel="noopener noreferrer">
-        WhatsApp · {profile.phone}
-      </a>
     </footer>
   );
 }

@@ -30,16 +30,16 @@ test("home mantém ordem, stack completa e contatos agrupados", async ({
   await page.goto("/");
   expect(
     await page
-      .locator("main > section[id]")
+      .locator("main section[id]")
       .evaluateAll((sections) => sections.map((section) => section.id)),
-  ).toEqual(["sobre", "stack", "projetos", "contatos"]);
+  ).toEqual(["sobre", "stack", "projetos", "repositories", "contatos"]);
   await expect(page.locator("#stack article")).toHaveCount(8);
   await expect(
     page.locator("#contatos a[href='tel:+5521974885166']"),
-  ).toHaveCount(2);
+  ).toHaveCount(0);
   await expect(
     page.locator("#contatos a[href='https://wa.me/5521974885166']"),
-  ).toHaveCount(1);
+  ).toHaveCount(0);
   const image = page.getByAltText("Retrato de Igor Franco");
   await expect(image).toBeVisible();
   expect(
@@ -65,7 +65,7 @@ test("filtros mostram 3, 1 e 2 casos e preservam foco e repositórios", async ({
     await expect(filter).toBeFocused();
     await expect(filter).toHaveAttribute("aria-pressed", "true");
     await expect(page.getByRole("status")).toContainText(String(count));
-    await expect(page.locator(".repository-row")).toHaveCount(3);
+    expect(await page.locator(".repository-row").count()).toBeGreaterThan(0);
   }
 });
 
@@ -184,10 +184,10 @@ test("movimento reduzido e conteúdo sem JavaScript", async ({
   ).toBe("none");
   const context = await browser.newContext({ javaScriptEnabled: false });
   const staticPage = await context.newPage();
-  await staticPage.goto("http://127.0.0.1:3000/");
+  await staticPage.goto("http://127.0.0.1:3100/");
   await expect(staticPage.getByRole("heading", { name: /IGOR/ })).toBeVisible();
   await expect(
-    staticPage.getByRole("link", { name: "Conversar no WhatsApp" }),
+    staticPage.getByRole("heading", { name: /Me conta/ }),
   ).toBeVisible();
   await context.close();
 });

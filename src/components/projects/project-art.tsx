@@ -1,3 +1,4 @@
+import { ScrollSurface } from "@/components/motion/scroll-surface";
 import type { Project } from "@/content/projects";
 import { Icon } from "@/components/ui/icon";
 
@@ -13,22 +14,24 @@ export function ProjectArt({ project }: { project: Project }) {
         </span>
       </div>
       {isEscoply ? (
-        <div className="paper">
-          <div className="paper-head">
-            <b>Seu trabalho, em ordem.</b>
-            <span>Visão do projeto</span>
-          </div>
-          {[
-            ["01 / Definir o escopo", "Concluído"],
-            ["02 / Aprovar a proposta", "Em revisão"],
-            ["03 / Fazer acontecer", "Próxima etapa"],
-          ].map(([label, state]) => (
-            <div className="paper-row" key={label}>
-              <span>{label}</span>
-              <span>{state}</span>
+        <ScrollSurface className="paper-motion">
+          <div className="paper">
+            <div className="paper-head">
+              <b>Seu trabalho, em ordem.</b>
+              <span>Visão do projeto</span>
             </div>
-          ))}
-        </div>
+            {[
+              ["Definir o escopo", "Concluído"],
+              ["Aprovar a proposta", "Em revisão"],
+              ["Fazer acontecer", "Próxima etapa"],
+            ].map(([label, state]) => (
+              <div className="paper-row" key={label}>
+                <span>{label}</span>
+                <span>{state}</span>
+              </div>
+            ))}
+          </div>
+        </ScrollSurface>
       ) : (
         <div className="service-art">
           <span>

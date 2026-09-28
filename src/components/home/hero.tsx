@@ -1,5 +1,6 @@
 import { profile } from "@/content/profile";
 import { ActionLink } from "@/components/ui/primitives";
+import { TechnologyMarquee } from "./technology-marquee";
 import { Portrait } from "@/components/ui/portrait";
 
 export function Hero() {
@@ -21,7 +22,6 @@ export function Hero() {
             </span>
           </h1>
           <div className="identity-note">
-            <span className="index">01 / OLÁ</span>
             <p>
               Meu foco é mobile.
               <br />
@@ -38,13 +38,7 @@ export function Hero() {
         </div>
         <Portrait priority />
       </section>
-      <ul className="stack-ribbon" aria-label="Tecnologias em destaque">
-        {["React Native", "TypeScript", "React / Next.js", "Node.js"].map(
-          (item) => (
-            <li key={item}>{item}</li>
-          ),
-        )}
-      </ul>
+      <TechnologyMarquee />
     </>
   );
 }

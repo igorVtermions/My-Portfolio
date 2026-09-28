@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { ButtonHTMLAttributes, ReactNode } from "react";
 import { Icon, type IconName } from "./icon";
+import { AnimatedDivider } from "@/components/motion/animated-divider";
 
 export function Container({ children }: { children: ReactNode }) {
   return <div className="container">{children}</div>;
@@ -10,18 +11,21 @@ export function Section({
   children,
   id,
   className = "",
+  separator = "line",
 }: {
   children: ReactNode;
   id: string;
   className?: string;
+  separator?: "line" | "none";
 }) {
   return (
     <section
       id={id}
       tabIndex={-1}
       aria-labelledby={`${id}-title`}
-      className={`section ${className}`}
+      className={`section ${separator === "line" ? "section-divided" : ""} ${className}`}
     >
+      {separator === "line" && <AnimatedDivider />}
       {children}
     </section>
   );
@@ -69,7 +73,7 @@ export function ActionLink({
   const classes = `action action-${variant} ${className}`;
   const content = (
     <>
-      {children}
+      <span className="action-label">{children}</span>
       <Icon name={external ? "external-link" : icon} />
     </>
   );
@@ -90,6 +94,7 @@ export function ActionLink({
 }
 
 export function Button({
+  children,
   className = "",
   variant = "secondary",
   ...props
@@ -101,7 +106,9 @@ export function Button({
       type="button"
       className={`action action-${variant} ${className}`}
       {...props}
-    />
+    >
+      <span className="action-label">{children}</span>
+    </button>
   );
 }
 

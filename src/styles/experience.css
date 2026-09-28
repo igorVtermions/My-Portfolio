@@ -1,0 +1,235 @@
+.technology-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  color: var(--accent-soft);
+  font: 700 17px var(--font-mono);
+  letter-spacing: -1px;
+}
+.technology-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px 20px;
+  list-style: none;
+  padding: 0;
+  margin: 24px 0 0;
+}
+.technology-list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  min-width: 0;
+}
+.technology-list .technology-icon {
+  background: var(--tag-surface);
+  border-radius: 8px;
+  transition:
+    transform 450ms var(--ease-out),
+    background 450ms;
+}
+.stack-group:hover .technology-icon {
+  background: var(--surface);
+  transform: translateY(-3px);
+}
+.stack-group {
+  padding: 32px;
+  border-radius: 8px;
+  background: transparent;
+}
+.stack-group:hover {
+  box-shadow: none;
+}
+.stack-title h3 {
+  font-size: 26px;
+}
+.marquee-group > span {
+  justify-content: center;
+  gap: 16px;
+}
+.marquee-control {
+  position: absolute;
+  right: 0;
+  top: -30px;
+  width: 44px;
+  padding: 0;
+  color: var(--accent-soft);
+  font-size: 18px;
+}
+.technology-marquee[data-enabled="true"] .marquee-track {
+  animation-name: technology-scroll !important;
+  animation-duration: var(--marquee-duration, 40s) !important;
+  animation-timing-function: linear !important;
+  animation-iteration-count: infinite !important;
+}
+.carousel-stage {
+  overflow: hidden;
+}
+.carousel-stage .feature-copy h3 {
+  font-size: clamp(32px, 4vw, 52px);
+}
+.carousel-stage .feature-project {
+  min-height: 440px;
+}
+.carousel-controls {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  align-items: center;
+  padding-top: 24px;
+}
+.carousel-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.carousel-tabs button,
+.carousel-buttons button {
+  background: none;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  padding: 10px 14px;
+  min-height: 44px;
+  transition:
+    color 350ms,
+    border-color 350ms,
+    background 350ms;
+}
+.carousel-tabs button[aria-pressed="true"],
+.carousel-controls button:hover {
+  color: var(--accent-soft);
+  border-color: var(--accent-soft);
+  background: var(--surface);
+}
+.carousel-buttons {
+  display: flex;
+  gap: 8px;
+}
+.carousel-buttons button {
+  width: 44px;
+  padding: 8px;
+}
+.contact-composition {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 64px;
+  margin-top: 24px;
+}
+.contact-introduction h2 {
+  font-size: clamp(34px, 4vw, 56px);
+}
+.contact-introduction > p {
+  max-width: 360px;
+  margin-top: 24px;
+}
+.contact-signature {
+  display: block;
+  margin-top: 48px;
+  color: var(--accent-soft);
+  font-size: 28px;
+  line-height: 1.2;
+}
+.contact-signature > span {
+  display: inline-block;
+  margin-left: 24px;
+  font-size: 48px;
+}
+.contact-form {
+  padding: 32px;
+  border: 1px solid var(--tag-border);
+  background: var(--surface);
+}
+.contact-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--foreground);
+  margin-bottom: 24px;
+}
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.contact-form input,
+.contact-form select,
+.contact-form textarea {
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  border-bottom: 1px solid var(--tag-border);
+  background: var(--background);
+  color: var(--foreground);
+  padding: 14px;
+  font: 14px/1.6 var(--font-body);
+  transition:
+    border-color 350ms,
+    background 350ms;
+}
+.contact-form :is(input, select, textarea):focus {
+  border-color: var(--accent-soft);
+}
+.contact-form textarea {
+  resize: vertical;
+}
+.form-submit {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+.form-submit p {
+  font-size: 12px;
+  max-width: 150px;
+}
+.form-status {
+  min-height: 24px;
+  margin-top: 16px;
+  font-size: 13px;
+}
+.action-primary:is(:hover, :focus-visible) {
+  transform: translateY(-2px);
+}
+@media (max-width: 700px) {
+  .technology-list {
+    gap: 12px;
+  }
+  .technology-list li {
+    font-size: 12px;
+    gap: 6px;
+  }
+  .stack-grid {
+    gap: 16px;
+  }
+  .contact-composition {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .contact-signature {
+    display: none;
+  }
+  .contact-form {
+    padding: 20px;
+  }
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .form-submit,
+  .carousel-controls {
+    flex-wrap: wrap;
+  }
+  .carousel-stage .feature-project {
+    min-height: 700px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .stack-group:hover .technology-icon,
+  .action-primary:is(:hover, :focus-visible) {
+    transform: none;
+  }
+}

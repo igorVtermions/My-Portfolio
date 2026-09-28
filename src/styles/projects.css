@@ -8,14 +8,6 @@
   padding: var(--space-5);
   position: relative;
 }
-.project-number {
-  position: absolute;
-  right: 26px;
-  top: 20px;
-  font: 44px/1 var(--font-body);
-  color: var(--muted);
-  opacity: 0.55;
-}
 .feature-copy h3 {
   font-size: 52px;
   letter-spacing: -3px;
@@ -155,10 +147,6 @@
   border-bottom: 1px solid var(--border);
   padding: 25px 0;
 }
-.project-row > span {
-  font: 11px var(--font-mono);
-  color: var(--accent-soft);
-}
 .project-row > div {
   display: flex;
   align-items: center;
@@ -203,7 +191,6 @@
 }
 .filter-button[aria-pressed="true"] {
   color: var(--foreground);
-  box-shadow: 0 2px var(--accent-soft);
 }
 .filter-status {
   margin: var(--space-3) 0 var(--space-5);

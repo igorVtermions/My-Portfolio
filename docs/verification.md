@@ -1,5 +1,15 @@
 # Verificação da implementação
 
+## Revisão de autoplay e apresentação
+
+24 testes passaram após a revisão dos carrosséis, incluindo autoplay com movimento reduzido, continuidade depois da seleção manual, hover e pausa explícita. Build, lint e TypeScript aprovados. Cards do GitHub e demonstração de código/interface revisados em desktop e celular; capturas em `docs/qa/github-cards.png`, `docs/qa/contact-build.png` e `docs/qa/contact-build-mobile.png`.
+
+## Revisão de movimento e contato, 28/09/2026
+
+Build e lint concluídos. **23 testes passaram** no build final, incluindo hidratação com movimento reduzido, reprodução explícita da faixa, alternância automática dos projetos, seleção manual, formulário com sucesso/falha simulados, API com entrada inválida, Axe e responsividade em seis larguras. Nenhum e-mail real foi enviado. Envio em produção depende de `RESEND_API_KEY` e `CONTACT_FROM_EMAIL`.
+
+Capturas e vídeos locais da revisão desktop/mobile: `docs/qa/motion-after/`. GitHub apresentou repositórios reais durante a revisão. O material abaixo preserva o registro da primeira implementação.
+
 Data: 28/09/2026. Ambiente: Windows, Node.js 24.11.1, Next.js 16.3.6 em build de produção e Microsoft Edge headless controlado pelo Playwright.
 
 ## Resultados

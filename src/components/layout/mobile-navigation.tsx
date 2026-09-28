@@ -12,6 +12,7 @@ import { focusDestination } from "./hash-focus";
 export function MobileNavigation() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
+  const [navigating, setNavigating] = useState(false);
   const closeRef = useRef<HTMLButtonElement>(null);
   const destination = useRef<string | null>(null);
 
@@ -25,7 +26,13 @@ export function MobileNavigation() {
   }, []);
 
   return (
-    <Dialog.Root open={open} onOpenChange={setOpen}>
+    <Dialog.Root
+      open={open}
+      onOpenChange={(value) => {
+        if (value) setNavigating(false);
+        setOpen(value);
+      }}
+    >
       <Dialog.Trigger className="menu-toggle" aria-label="Abrir menu">
         Menu <Icon name="menu" />
       </Dialog.Trigger>
@@ -33,6 +40,8 @@ export function MobileNavigation() {
         <Dialog.Overlay className="menu-overlay" />
         <Dialog.Content
           className="menu-panel"
+          inert={!open}
+          data-navigating={navigating || undefined}
           aria-describedby={undefined}
           onOpenAutoFocus={(event) => {
             event.preventDefault();
@@ -57,7 +66,7 @@ export function MobileNavigation() {
             </Dialog.Close>
           </div>
           <nav className="panel-nav" aria-label="Navegação mobile">
-            {mobileNavigation.map((item, index) => (
+            {mobileNavigation.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
@@ -65,10 +74,10 @@ export function MobileNavigation() {
                 aria-current={pathname === item.href ? "page" : undefined}
                 onClick={() => {
                   destination.current = item.href;
+                  setNavigating(true);
                   setOpen(false);
                 }}
               >
-                <span>{String(index + 1).padStart(2, "0")}</span>
                 {item.label}
                 <Icon name="arrow-up-right" />
               </Link>

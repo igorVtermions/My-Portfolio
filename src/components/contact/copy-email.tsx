@@ -25,7 +25,10 @@ export function CopyEmail() {
   return (
     <div className="copy-email">
       <Button onClick={copyEmail}>
-        Copiar e-mail <Icon name={copied ? "check" : "copy"} />
+        Copiar e-mail{" "}
+        <span className="copy-feedback" key={String(copied)}>
+          <Icon name={copied ? "check" : "copy"} />
+        </span>
       </Button>
       <p role="status" className="copy-status">
         {message}

@@ -50,23 +50,12 @@
   padding: 10px 0;
   background: transparent;
 }
-.action-primary:hover,
-.action-primary:focus-visible {
-  background: var(--accent-soft);
-  border-color: var(--accent-soft);
-  color: var(--background);
-}
+
 .action-secondary:hover,
 .action-secondary:focus-visible {
   color: var(--accent-soft);
 }
-.action:hover .icon,
-.action:focus-visible .icon {
-  transform: translateX(3px);
-}
-.action:active {
-  transform: scale(0.98);
-}
+
 .action:disabled {
   opacity: 0.45;
   cursor: not-allowed;
