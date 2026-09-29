@@ -80,15 +80,6 @@
   background: var(--accent-soft);
   transform-origin: top;
 }
-.filter-button {
-  position: relative;
-}
-.filter-indicator {
-  position: absolute;
-  inset: auto 0 -1px;
-  height: 2px;
-  background: var(--accent-soft);
-}
 .desktop-nav a {
   position: relative;
 }

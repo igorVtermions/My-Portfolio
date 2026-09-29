@@ -1,4 +1,5 @@
-import { projects } from "./projects";
+import { escoply } from "./projects";
+import { experiences, experiencePeriod } from "./experiences";
 
 export const timeline = [
   {
@@ -7,17 +8,16 @@ export const timeline = [
     description:
       "Conclusão do Tecnólogo em Análise e Desenvolvimento de Sistemas na Universidade Unopar e início da atuação em desenvolvimento web freelance.",
   },
-  ...projects
-    .filter((project) => project.period)
-    .reverse()
-    .map((project) => ({
-      title: project.name,
-      period: project.period,
-      description: project.contribution,
+  ...[...experiences]
+    .sort((a, b) => a.startDate.localeCompare(b.startDate))
+    .map((experience) => ({
+      title: experience.name,
+      period: experiencePeriod(experience),
+      description: experience.summary,
     })),
   {
     title: "Escoply",
     period: "Produto autoral em construção",
-    description: projects[0].currentState,
+    description: escoply.currentState,
   },
 ];

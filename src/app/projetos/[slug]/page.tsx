@@ -2,8 +2,13 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { projects } from "@/content/projects";
 import { ProjectCase } from "@/components/projects/project-case";
+import { experiences, experiencePeriod } from "@/content/experiences";
+import { ExperienceCase } from "@/components/experience/experience-case";
 
-const cases = projects.filter((project) => project.slug !== "thux-mathux");
+const legacyExperiences = experiences.filter((item) =>
+  item.href.startsWith("/projetos/"),
+);
+const cases = [...projects, ...legacyExperiences];
 export function generateStaticParams() {
   return cases.map((project) => ({ slug: project.slug }));
 }
@@ -16,7 +21,13 @@ export async function generateMetadata({
   const { slug } = await params;
   const project = cases.find((item) => item.slug === slug);
   if (!project) notFound();
-  return { title: project.name, description: project.summary };
+  return {
+    title: project.name,
+    description:
+      "startDate" in project
+        ? `${experiencePeriod(project)}. ${project.summary}`
+        : project.summary,
+  };
 }
 
 export default async function ProjectPage({
@@ -27,5 +38,9 @@ export default async function ProjectPage({
   const { slug } = await params;
   const project = cases.find((item) => item.slug === slug);
   if (!project) notFound();
-  return <ProjectCase project={project} />;
+  return "startDate" in project ? (
+    <ExperienceCase experience={project} />
+  ) : (
+    <ProjectCase project={project} />
+  );
 }

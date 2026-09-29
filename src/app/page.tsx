@@ -1,7 +1,7 @@
 import { Hero } from "@/components/home/hero";
 import { AboutSection } from "@/components/home/about-section";
 import { StackSection } from "@/components/home/stack-section";
-import { SelectedProjects } from "@/components/home/selected-projects";
+import { ExperienceSection } from "@/components/experience/experience-section";
 import { RepositoryIndex } from "@/components/home/repository-index";
 import { ContactSection } from "@/components/contact/contact-section";
 
@@ -11,7 +11,7 @@ export default function HomePage() {
       <Hero />
       <AboutSection />
       <StackSection />
-      <SelectedProjects />
+      <ExperienceSection />
       <RepositoryIndex />
       <ContactSection />
     </>

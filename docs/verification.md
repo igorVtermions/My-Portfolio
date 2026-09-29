@@ -1,5 +1,17 @@
 # Verificação da implementação
 
+## Explorador de código público, 29/09/2026
+
+Build, lint, TypeScript e 29 testes aprovados. Cobertura de seleção por teclado sem rede, seletor mobile, ações condicionais, fallback de API, resposta vazia, normalização e conteúdo sem JavaScript. As demonstrações do portfólio, Escoply Web e Ticket System responderam HTTP 200 com títulos correspondentes. Build com acesso ao GitHub validou metadados reais e último push; fallback foi validado separadamente. Capturas desktop/mobile em `docs/qa/repo-explorer-desktop.png` e `docs/qa/repo-explorer-mobile.png`.
+
+## Experiências e produto autoral, 29/09/2026
+
+24 testes aprovados após substituir carrossel/filtros por duas experiências e um produto autoral. Verificados períodos (Mágicos: janeiro de 2026 até o presente; Thux: junho de 2025 a agosto de 2026), rotas preservadas, contribuições, trajetória, Axe, navegação e seis larguras entre 320 e 1440 px. Build com TypeScript e lint aprovados. Revisão visual da seção e do detalhe da Thux em desktop/mobile. Fonte das funções: PDF fornecido; início na Mágicos confirmado diretamente pelo autor.
+
+## Ajuste da faixa e rolagem, 29/09/2026
+
+Removidos controle de pausa e sinais de soma da faixa; margem inferior reduzida a 24 px. Rolagem de âncoras na mesma página usa desaceleração, atualiza URL e foco e cancela ao receber interação manual. Build, lint e 25 testes aprovados, incluindo percurso intermediário da rolagem e navegação pelo menu mobile.
+
 ## Revisão de autoplay e apresentação
 
 24 testes passaram após a revisão dos carrosséis, incluindo autoplay com movimento reduzido, continuidade depois da seleção manual, hover e pausa explícita. Build, lint e TypeScript aprovados. Cards do GitHub e demonstração de código/interface revisados em desktop e celular; capturas em `docs/qa/github-cards.png`, `docs/qa/contact-build.png` e `docs/qa/contact-build-mobile.png`.

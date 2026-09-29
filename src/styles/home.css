@@ -77,12 +77,6 @@
   margin-top: 18px;
   letter-spacing: -1.5px;
 }
-.about-signature {
-  display: block;
-  font: 11px var(--font-mono);
-  margin-top: 28px;
-  color: var(--muted);
-}
 .about-story p {
   margin-bottom: 20px;
   font-size: 15px;

@@ -1,15 +1,17 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { projects } from "@/content/projects";
-import { ProjectCase } from "@/components/projects/project-case";
+import { experiences, experiencePeriod } from "@/content/experiences";
+import { ExperienceCase } from "@/components/experience/experience-case";
+
+const experience = experiences.find((item) => item.slug === "thux-mathux");
 
 export const metadata: Metadata = {
   title: "Experiência na Thux / Mathux",
-  description:
-    "Atuação Full Stack de Igor Franco na Thux/Mathux, de junho de 2025 a agosto de 2026. Desenvolvimento web, mobile e APIs.",
+  description: experience
+    ? `Atuação de Igor Franco na Thux / Mathux: ${experiencePeriod(experience)}. ${experience.summary}`
+    : "Experiência na Thux / Mathux.",
 };
 export default function ExperiencePage() {
-  const project = projects.find((item) => item.slug === "thux-mathux");
-  if (!project) notFound();
-  return <ProjectCase project={project} />;
+  if (!experience) notFound();
+  return <ExperienceCase experience={experience} />;
 }

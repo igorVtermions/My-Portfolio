@@ -1,15 +1,4 @@
-@media (hover: hover) and (prefers-reduced-motion: no-preference) {
-  .feature-project:hover .paper {
-    transform: rotate(-3deg) scale(1.015);
-  }
-}
 @media (min-width: 701px) and (max-width: 900px) {
-  .feature-copy {
-    padding: 25px;
-  }
-  .feature-project {
-    grid-template-columns: 1fr 1fr;
-  }
   .paper-head {
     display: block;
   }
@@ -18,22 +7,6 @@
   }
 }
 @media (max-width: 700px) {
-  .feature-project {
-    grid-template-columns: 1fr;
-  }
-  .feature-copy {
-    padding: var(--space-4);
-  }
-  .feature-copy h3 {
-    font-size: 46px;
-  }
-  .feature-project .project-art {
-    min-height: 300px;
-    padding: 22px;
-  }
-  .feature-project .paper {
-    width: 100%;
-  }
   .project-art {
     padding: 20px;
     min-height: 290px;
@@ -77,38 +50,6 @@
   .project-art small {
     font-size: 8px;
   }
-  .service-art {
-    padding: 40px 0;
-  }
-  .service-art > span {
-    font-size: 35px;
-  }
-  .service-art > div {
-    font-size: 10px;
-    gap: var(--space-2);
-    flex-wrap: wrap;
-  }
-  .project-row {
-    gap: 14px;
-    padding: 20px 0;
-  }
-  .project-row > div {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: var(--space-1);
-  }
-  .project-row strong {
-    font-size: 20px;
-  }
-  .project-row .icon {
-    width: 18px;
-  }
-  .filter-bar {
-    gap: 20px;
-  }
-  .filter-button {
-    font-size: 12px;
-  }
   .case-meta {
     grid-template-columns: 1fr;
     gap: 15px;
@@ -126,7 +67,6 @@
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .project-row:hover .icon,
   .repository-row:hover .icon {
     transform: none;
   }

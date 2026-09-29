@@ -49,26 +49,6 @@ test("home mantém ordem, stack completa e contatos agrupados", async ({
   ).toBeGreaterThan(0);
 });
 
-test("filtros mostram 3, 1 e 2 casos e preservam foco e repositórios", async ({
-  page,
-}) => {
-  await page.goto("/projetos");
-  await expect(page.locator(".project-card")).toHaveCount(3);
-  for (const [category, count] of [
-    ["Autoral", 1],
-    ["Profissional", 2],
-    ["Todos", 3],
-  ] as const) {
-    const filter = page.getByRole("button", { name: new RegExp(category) });
-    await filter.click();
-    await expect(page.locator(".project-card")).toHaveCount(count);
-    await expect(filter).toBeFocused();
-    await expect(filter).toHaveAttribute("aria-pressed", "true");
-    await expect(page.getByRole("status")).toContainText(String(count));
-    expect(await page.locator(".repository-row").count()).toBeGreaterThan(0);
-  }
-});
-
 test("menu mantém foco, fecha com Escape, botão e backdrop", async ({
   page,
 }) => {

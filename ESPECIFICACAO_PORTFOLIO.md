@@ -798,6 +798,10 @@ Igor aprovou o plano em docs/plano-evolucao-visual.md: remover numeração ornam
 
 ### Ajustes solicitados após a revisão visual
 
+Revisão de experiências aprovada em 29/09: substituir o carrossel por Mágicos da Limpeza e Thux / Mathux sempre visíveis, com cargo, datas e responsabilidades. Mágicos começa em janeiro de 2026, conforme confirmação direta do autor. Separar Escoply como produto autoral, sem inventar data de início. Adaptar listagem, trajetória e páginas de detalhe, preservando URLs. O plano está em `docs/plano-experiencias-e-produto.md`; esta revisão substitui o autoplay e os filtros previstos anteriormente para projetos.
+
+Revisão de 29/09: remover o botão de pausa e os sinais “+” apenas da faixa de tecnologias, reduzir a margem inferior para 24 px e suavizar a rolagem ao clicar em links de seção. Essa solicitação substitui o controle manual previsto anteriormente para a faixa.
+
 Revisão posterior: o autor solicitou reprodução automática dos dois carrosséis mesmo com movimento reduzido, sem interrupção por hover ou seleção manual. Manter pausa explícita e suspensão fora da viewport/aba oculta. Remover notas complementares da stack e frases indicadas no contato. Apresentar repositórios em cards e substituir a assinatura “Vamos tirar do papel” por uma demonstração de código se transformando em interface. Esta revisão prevalece sobre as regras de reprodução anteriores.
 
 Esta orientação substitui os trechos anteriores conflitantes: stack com ícones de tecnologias, sem o aviso geral sobre níveis de experiência; carrossel real de projetos; repositórios recentes via GitHub; formulário com envio direto pelo servidor; remoção do bloco de telefone e WhatsApp na home e no rodapé. A página dedicada de contato mantém seus canais. Não exibir o texto técnico “Movimento reduzido”. Respeitar a preferência do sistema no início e permitir reprodução explícita dos carrosséis. Servidor e primeira renderização do cliente devem produzir conteúdo idêntico. Hovers precisam de transições tanto na entrada quanto na saída.

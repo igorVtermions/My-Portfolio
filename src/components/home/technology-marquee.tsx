@@ -20,8 +20,6 @@ export function TechnologyMarquee() {
   const groupRef = useRef<HTMLDivElement>(null);
   const ready = useSyncExternalStore(subscribe, clientSnapshot, serverSnapshot);
   const visible = useInView(ref);
-  const [paused, setPaused] = useState(false);
-  const running = !paused;
   const [pageVisible, setPageVisible] = useState(true);
 
   useEffect(() => {
@@ -47,8 +45,8 @@ export function TechnologyMarquee() {
       ref={ref}
       className="technology-marquee"
       data-ready={ready}
-      data-enabled={running}
-      data-running={ready && visible && pageVisible && running}
+      data-enabled={true}
+      data-running={ready && visible && pageVisible}
     >
       <ul className="sr-only" aria-label="Tecnologias em destaque">
         {technologies.map((item) => (
@@ -67,26 +65,12 @@ export function TechnologyMarquee() {
                 <span key={item}>
                   <TechnologyIcon name={item} />
                   {item}
-                  <i>+</i>
                 </span>
               ))}
             </div>
           ))}
         </div>
       </div>
-      <button
-        type="button"
-        className="marquee-control"
-        aria-pressed={!running}
-        onClick={(event) => {
-          setPaused(running);
-          if (event.detail > 0) event.currentTarget.blur();
-        }}
-        disabled={!ready}
-        aria-label={running ? "Pausar movimento" : "Reproduzir movimento"}
-      >
-        <span aria-hidden="true">{running ? "Ⅱ" : "▷"}</span>
-      </button>
     </div>
   );
 }

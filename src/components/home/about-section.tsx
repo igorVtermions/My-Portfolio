@@ -14,7 +14,6 @@ export function AboutSection() {
           <br />
           <em>o projeto por inteiro.</em>
         </h2>
-        <span className="about-signature">Igor Franco / Full Stack</span>
       </Reveal>
       <Reveal className="about-story" delay={0.06}>
         {profile.biography.map((paragraph, index) => (

@@ -42,14 +42,14 @@ Os casos distinguem contexto, contribuição, tecnologias e estado atual. A foto
 - **Apresentação pessoal:** nome, fotografia, foco profissional e acesso aos projetos e à história completa.
 - **Sobre mim na home:** trajetória e contexto profissional disponíveis na própria página inicial.
 - **Stack completa:** oito grupos de tecnologias e práticas, incluindo notas sobre formação complementar e recursos em desenvolvimento.
-- **Seleção de trabalhos:** carrossel com os três casos, troca automática a cada 6,5 segundos e controles de navegação e pausa.
-- **Filtros de projetos:** Todos, Autoral e Profissional, com contagens de 3, 1 e 2 casos.
+- **Experiências profissionais:** Mágicos da Limpeza e Thux / Mathux visíveis, com cargo, período, responsabilidades e tecnologias.
+- **Produto autoral:** Escoply em destaque próprio, separado dos vínculos profissionais.
 - **Páginas de caso:** contexto, contribuição, tecnologias e estado de cada trabalho.
-- **Código público:** links diretos para os repositórios apresentados.
+- **Código público:** explorador com seleção por teclado, detalhes técnicos, último push, README, histórico e demonstrações verificadas; seletor compacto no celular.
 - **Contato direto:** e-mail, telefone, WhatsApp, GitHub e LinkedIn.
 - **Cópia de e-mail:** feedback de sucesso e tratamento de falha do clipboard.
 - **Menu mobile:** painel modal com navegação por teclado e atalhos para seções da home.
-- **Animações:** revelações de conteúdo, transições de filtros e respostas de interação com suporte a movimento reduzido.
+- **Animações:** revelações de conteúdo e respostas de interação com suporte a movimento reduzido, além da faixa automática de tecnologias.
 - **Página 404:** tratamento de endereços e projetos inexistentes com retorno à home.
 
 O formulário da home envia mensagens pelo servidor usando Resend. Telefone e WhatsApp ficam na página dedicada de contato; foram removidos da home e do footer. O escopo não inclui autenticação, banco de dados ou CMS.
@@ -70,9 +70,11 @@ Thux/Mathux é apresentada como experiência profissional, não como um produto 
 | ----------------------------------------------------------------- | -------------------------------- | --------------------- |
 | [escoply-web](https://github.com/igorVtermions/escoply-web)       | Frente web do produto autoral    | TypeScript            |
 | [escoply-mobile](https://github.com/igorVtermions/escoply-mobile) | Frente mobile do produto autoral | TypeScript            |
-| [Master-Manager](https://github.com/igorVtermions/Master-Manager) | Repositório fixado no perfil     | JavaScript            |
+| [nutritrack](https://github.com/igorVtermions/nutritrack) | MVP mobile com persistência local | TypeScript |
 
-A home e a listagem consultam a API pública do GitHub no servidor, com revalidação de uma hora. São exibidos até seis repositórios próprios, públicos e não arquivados, ordenados pelo último push. Forks são excluídos. A tabela acima documenta a seleção local usada quando a API fica indisponível. Não é necessário token.
+A home e a listagem consultam até 100 repositórios pela API pública do GitHub no servidor, com revalidação de uma hora. A seleção exibe até seis: destaque editorial primeiro, demais ordenados pelo último push. Repositórios privados, forks, arquivados, desabilitados e o README do perfil são excluídos. Trocar o projeto selecionado não faz requisições adicionais. Datas usam UTC, sem confundir push com autoria de commit ou release.
+
+`src/content/repositories.ts` concentra a curadoria, descrições e demos verificadas em 29/09/2026. A seleção local de fallback inclui Escoply Web/Mobile, portfólio, NutriTrack, Fit Life e Ticket System, sem inventar datas ou linguagens retornadas pela API. As três demos verificadas são Escoply Web, portfólio e Ticket System. Novos links devem ser revisados antes de entrar na curadoria; o campo remoto `homepage` não é tratado automaticamente como demo. Sem JavaScript, os projetos aparecem em lista linear; o detalhe do Escoply mantém somente os links relacionados.
 
 ## Tecnologias
 
@@ -98,7 +100,7 @@ O `package-lock.json` registra a árvore de dependências. Use `npm ci` para rep
 | Rota                           | Conteúdo                                                           |
 | ------------------------------ | ------------------------------------------------------------------ |
 | `/`                            | Apresentação, sobre mim, stack, trabalhos, repositórios e contatos |
-| `/projetos`                    | Lista de casos com filtros e índice de código público              |
+| `/projetos`                    | Trabalhos e produtos: experiências, Escoply e código público       |
 | `/projetos/escoply`            | Caso do produto autoral                                            |
 | `/projetos/magicos-da-limpeza` | Caso da colaboração profissional                                   |
 | `/experiencia/thux-mathux`     | Experiência na empresa                                             |
@@ -163,7 +165,8 @@ src/
     ui/                    Primitivos, ícones e retrato
     layout/                Cabeçalho, rodapé, menu e foco de hash
     home/                  Seções da página inicial
-    projects/              Cards, linhas, filtros e páginas de caso
+    projects/              Produto autoral e página de caso
+    experience/            Experiências, períodos e páginas de atuação
     about/                 Linha do tempo
     contact/               Contato direto, redes e clipboard
     motion/                Provedor e wrappers de animação
@@ -184,9 +187,9 @@ work/                      Materiais de trabalho e extrações locais
 
 As páginas compõem seções e definem metadados. Os dados ficam em módulos de conteúdo, os componentes de domínio organizam a apresentação e os primitivos compartilham contratos visuais e semânticos.
 
-**Server Components são o padrão.** Menu, filtros, clipboard, foco de hash e wrappers de movimento delimitam as partes que precisam de JavaScript no navegador. Conteúdo estático pode ser passado por composição para essas camadas.
+**Server Components são o padrão.** Menu, clipboard, foco de hash e wrappers de movimento delimitam as partes que precisam de JavaScript no navegador. Experiências e produto autoral são conteúdo de servidor, sem carrossel ou filtros.
 
-Estado local é mantido perto da interação, sem gerenciador global. Projetos e categorias possuem tipos explícitos; slugs inválidos são tratados com `notFound()`.
+Estado local é mantido perto da interação, sem gerenciador global. Experiências e produtos possuem tipos próprios; slugs inválidos são tratados com `notFound()`.
 
 ### Práticas adotadas
 
@@ -234,9 +237,11 @@ O projeto inclui skip link, landmarks semânticos, um H1 por página, foco visí
 
 O menu utiliza Radix Dialog para contenção e restauração de foco, fechamento por Escape e interação com o backdrop. Também fecha ao mudar para desktop e permite rolagem interna em telas baixas.
 
-Os filtros usam `aria-pressed` e anunciam a contagem resultante. Itens em saída ficam `inert` para não permanecerem no percurso de foco. O clipboard anuncia sucesso ou falha em uma região de status.
+Experiências apresentam datas estruturadas em elementos `time` e contribuições em listas. O conteúdo essencial permanece visível. O clipboard anuncia sucesso ou falha em uma região de status.
 
-As animações usam Motion e CSS, com parâmetros compartilhados em [motion-tokens.ts](src/lib/motion-tokens.ts). O hook `useMotionPreference` usa um snapshot estável para servidor e hidratação. Por solicitação do autor, a faixa de tecnologias e o carrossel de projetos iniciam automaticamente, inclusive com movimento reduzido, e mantêm controles de pausa. Hover e seleção manual não interrompem a reprodução; ela é suspensa fora da tela ou com a aba oculta. Os demais efeitos respeitam a preferência do sistema. A demonstração de contato alterna código e interface; com movimento reduzido, apresenta a interface estática. O conteúdo principal permanece legível sem JavaScript.
+As animações usam Motion e CSS, com parâmetros compartilhados em [motion-tokens.ts](src/lib/motion-tokens.ts). O hook `useMotionPreference` usa um snapshot estável para servidor e hidratação. A faixa de tecnologias inicia automaticamente e suspende a reprodução fora da tela ou com a aba oculta. Experiências ficam sempre visíveis, com entrada suave e sem troca automática. Links de seção na página atual usam rolagem animada entre 650 e 1.200 ms, com desaceleração e cancelamento por interação manual. O conteúdo principal permanece legível sem JavaScript.
+
+A demonstração de contato digita código ilustrativo, aciona Run e monta uma landing page com a identidade de Igor. O visitante pode antecipar a execução, pausar ou repetir; o resultado permanece visível com um CTA que leva ao primeiro campo vazio do formulário. O preenchimento pausa a sequência, e repetir nunca apaga os dados. A reprodução também suspende fora da viewport e com aba oculta. Com movimento reduzido, a prévia é estática e oferece reprodução opcional. Sem JavaScript, a prévia e o link para contato continuam disponíveis. Não há execução real do trecho de código nem envio automático de e-mail.
 
 ## Testes e validação
 
@@ -257,7 +262,7 @@ A configuração Playwright usa `http://127.0.0.1:3100`, dois workers e Microsof
 
 - Acesso direto às sete rotas, títulos e H1 único.
 - Ordem da home, oito categorias de stack e contatos agrupados.
-- Filtros, contagens, foco e permanência dos repositórios.
+- Separação entre experiências e produto autoral, períodos e páginas de atuação.
 - Menu com teclado, Escape, botão, backdrop e mudança de viewport.
 - Navegação para hashes dentro e fora da home.
 - Sucesso e falha na cópia do e-mail.
@@ -281,17 +286,18 @@ As capturas e o arquivo `lab-metrics.json` são gravados em `docs/qa/`, pasta ge
 
 ## Manutenção do conteúdo
 
-| Alteração                                               | Arquivo                                                    |
-| ------------------------------------------------------- | ---------------------------------------------------------- |
-| Nome, apresentação, biografia, contatos e navegação     | [src/content/profile.ts](src/content/profile.ts)           |
-| Categorias, tecnologias e notas da stack                | [src/content/stack.ts](src/content/stack.ts)               |
-| Projetos, períodos, status, contribuições e tecnologias | [src/content/projects.ts](src/content/projects.ts)         |
-| Repositórios públicos                                   | [src/content/repositories.ts](src/content/repositories.ts) |
-| Formação e linha do tempo                               | [src/content/timeline.ts](src/content/timeline.ts)         |
-| Tokens de identidade visual                             | [src/styles/tokens.css](src/styles/tokens.css)             |
-| Tempos e parâmetros de animação em React                | [src/lib/motion-tokens.ts](src/lib/motion-tokens.ts)       |
+| Alteração                                           | Arquivo                                                    |
+| --------------------------------------------------- | ---------------------------------------------------------- |
+| Nome, apresentação, biografia, contatos e navegação | [src/content/profile.ts](src/content/profile.ts)           |
+| Categorias, tecnologias e notas da stack            | [src/content/stack.ts](src/content/stack.ts)               |
+| Produto autoral, status e tecnologias               | [src/content/projects.ts](src/content/projects.ts)         |
+| Empresas, períodos, cargos e contribuições          | [src/content/experiences.ts](src/content/experiences.ts)   |
+| Repositórios públicos                               | [src/content/repositories.ts](src/content/repositories.ts) |
+| Formação e linha do tempo                           | [src/content/timeline.ts](src/content/timeline.ts)         |
+| Tokens de identidade visual                         | [src/styles/tokens.css](src/styles/tokens.css)             |
+| Tempos e parâmetros de animação em React            | [src/lib/motion-tokens.ts](src/lib/motion-tokens.ts)       |
 
-Ao adicionar um caso, mantenha slug e endereço coerentes e revise a listagem, a rota de detalhe, a composição visual e os testes. A seleção da home utiliza a ordem do array de projetos, com o primeiro como destaque. A linha do tempo deriva parte das experiências desses dados.
+Ao adicionar um caso, mantenha slug e endereço coerentes e revise a listagem, a rota de detalhe e os testes. Experiências profissionais ficam em `experiences.ts`, com datas `YYYY-MM` e fim `null` para atuação atual. A home e a listagem apresentam a atuação atual primeiro; a trajetória ordena os vínculos pela data inicial. O Escoply é referenciado pelo nome em `projects.ts`, sem depender da posição no array.
 
 O retrato fica em `public/images/igor-franco.jpeg`. Sua apresentação, enquadramento e carregamento são definidos pelo componente `Portrait`. Composições conceituais devem continuar identificadas até serem substituídas por capturas reais autorizadas. O currículo não faz parte dos arquivos públicos da aplicação.
 

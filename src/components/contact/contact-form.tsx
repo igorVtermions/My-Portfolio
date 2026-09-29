@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/primitives";
 import { Icon } from "@/components/ui/icon";
 import { profile } from "@/content/profile";
 
-export function ContactForm() {
+export function ContactForm({ onEngage }: { onEngage?: () => void }) {
   const [status, setStatus] = useState("");
   const [sending, setSending] = useState(false);
   async function submit(event: FormEvent<HTMLFormElement>) {
@@ -38,7 +38,14 @@ export function ContactForm() {
     }
   }
   return (
-    <form className="contact-form" onSubmit={submit}>
+    <form
+      id="contact-form"
+      aria-label="Entre em contato"
+      className="contact-form"
+      onSubmit={submit}
+      onFocusCapture={onEngage}
+      onInput={onEngage}
+    >
       <noscript>
         Ative o JavaScript para enviar pelo formulário ou escreva para{" "}
         <a href={`mailto:${profile.email}`}>{profile.email}</a>.

@@ -13,6 +13,10 @@
 @import "../styles/menu-motion.css";
 @import "../styles/experience.css";
 @import "../styles/showcase.css";
+@import "../styles/experiences.css";
+@import "../styles/repository-explorer.css";
+@import "../styles/stack-applied.css";
+@import "../styles/contact-demo.css";
 
 * {
   box-sizing: border-box;

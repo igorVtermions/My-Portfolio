@@ -24,12 +24,9 @@ export function ProjectCase({ project }: { project: Project }) {
     <>
       <section className="page-title">
         <ActionLink href="/projetos" icon="arrow-left">
-          Todos os projetos
+          Trabalhos e produtos
         </ActionLink>
-        <p className="eyebrow case-eyebrow">
-          {project.slug === "thux-mathux" ? "Experiência" : "Projeto"} /{" "}
-          {project.name}
-        </p>
+        <p className="eyebrow case-eyebrow">Produto autoral / {project.name}</p>
         <h1>
           {project.title[0]}
           <br />
@@ -42,10 +39,7 @@ export function ProjectCase({ project }: { project: Project }) {
           </div>
           <div>
             <span>Momento</span>
-            <p>
-              {project.period && <>{project.period} · </>}
-              {project.status}
-            </p>
+            <p>{project.status}</p>
           </div>
         </div>
       </section>

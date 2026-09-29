@@ -53,24 +53,20 @@ button.action > .action-label {
 .action:active {
   transform: scale(0.97);
 }
-.project-row,
 .repository-row {
   transition:
     background-color var(--motion-base),
     color var(--motion-fast);
 }
-.project-row:is(:hover, :focus-visible),
 .repository-row:is(:hover, :focus-visible) {
   background: var(--surface);
 }
-.project-row:is(:hover, :focus-visible) .icon,
 .repository-row:is(:hover, :focus-visible) .icon {
   transform: translate(5px, -3px);
 }
 @media (prefers-reduced-motion: reduce) {
   .action:active,
   .action:is(:hover, :focus-visible) .icon,
-  .project-row:is(:hover, :focus-visible) .icon,
   .repository-row:is(:hover, :focus-visible) .icon {
     transform: none;
   }

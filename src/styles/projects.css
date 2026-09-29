@@ -1,26 +1,3 @@
-.feature-project {
-  display: grid;
-  grid-template-columns: 1fr 1.25fr;
-  background: var(--surface);
-  border: 1px solid var(--border);
-}
-.feature-copy {
-  padding: var(--space-5);
-  position: relative;
-}
-.feature-copy h3 {
-  font-size: 52px;
-  letter-spacing: -3px;
-  margin: 25px 0 16px;
-}
-.feature-copy > p:not(.eyebrow) {
-  font-size: 14px;
-  line-height: 1.7;
-  max-width: 320px;
-}
-.feature-copy .action {
-  font-size: 12px;
-}
 .project-art {
   padding: 30px;
   min-height: 340px;
@@ -30,12 +7,6 @@
 }
 .art-escoply {
   background: var(--accent-soft);
-}
-.art-magicos-da-limpeza {
-  background: var(--art-light);
-}
-.art-thux-mathux {
-  background: var(--art-neutral);
 }
 .art-top {
   display: flex;
@@ -102,122 +73,8 @@
   margin-top: 18px;
   font: 10px/1.5 var(--font-mono);
 }
-.feature-project .project-art {
-  min-height: 365px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 25px;
-}
-.feature-project .art-top > span:last-child {
-  font-size: 8px;
-  max-width: 135px;
-}
-.feature-project .paper {
-  width: 94%;
-  transform: rotate(-3deg);
-  margin: var(--space-5) auto;
-}
-.feature-project .paper-head b {
-  font-size: 18px;
-}
-.feature-project .paper-head span {
-  font-size: 9px;
-}
-.service-art {
-  padding: 48px 20px;
-}
-.service-art > span {
-  font-size: 48px;
-  font-weight: 700;
-  line-height: 1.1;
-  letter-spacing: -2px;
-}
-.service-art > div {
-  display: flex;
-  align-items: center;
-  gap: var(--space-4);
-  margin-top: 25px;
-  font-size: 12px;
-}
-.project-row {
-  display: flex;
-  align-items: center;
-  gap: var(--space-4);
-  border-bottom: 1px solid var(--border);
-  padding: 25px 0;
-}
-.project-row > div {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex: 1;
-  gap: var(--space-3);
-}
-.project-row strong {
-  font-size: 22px;
-  font-weight: 500;
-  letter-spacing: -0.5px;
-}
-.project-row small {
-  font: 10px var(--font-mono);
-  color: var(--muted);
-}
-.project-row:hover,
-.project-row:focus-visible {
-  color: var(--accent-soft);
-  background: var(--surface);
-}
-.project-row:hover .icon,
 .repository-row:hover .icon {
   transform: translate(3px, -3px);
-}
-.filter-bar {
-  display: flex;
-  gap: var(--space-4);
-  border-bottom: 1px solid var(--border);
-}
-.filter-button {
-  border: 0;
-  background: none;
-  padding: 12px 0;
-  color: var(--muted);
-  font-size: 14px;
-  min-height: 44px;
-}
-.filter-button sup {
-  font: 10px var(--font-mono);
-  padding-left: 5px;
-}
-.filter-button[aria-pressed="true"] {
-  color: var(--foreground);
-}
-.filter-status {
-  margin: var(--space-3) 0 var(--space-5);
-}
-.project-list {
-  margin-bottom: var(--section-space);
-}
-.project-card {
-  margin-bottom: var(--space-6);
-}
-.project-caption {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  padding: 24px 0;
-}
-.project-caption > div {
-  width: 100%;
-}
-.project-caption p {
-  margin-top: var(--space-1);
-  font-size: 14px;
-}
-.project-caption .tags {
-  margin: 0;
 }
 .case-eyebrow {
   margin-top: 35px;

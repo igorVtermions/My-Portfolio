@@ -1,26 +1,6 @@
-import { TechnologyIcon } from "@/components/ui/technology-icon";
-import { stack, type StackCategory } from "@/content/stack";
+import { stackApplications, stackAreas } from "@/content/stack-applied";
 import { Section, SectionHeading } from "@/components/ui/primitives";
-import { StaggerGroup } from "@/components/motion/stagger-group";
-
-function StackGroup({ group }: { group: StackCategory }) {
-  return (
-    <article className="stack-group">
-      <div className="stack-title">
-        <h3>{group.title}</h3>
-      </div>
-      <p>{group.description}</p>
-      <ul className="technology-list">
-        {group.items.map((item) => (
-          <li key={item}>
-            <TechnologyIcon name={item} />
-            <span>{item}</span>
-          </li>
-        ))}
-      </ul>
-    </article>
-  );
-}
+import { StackExplorer } from "@/components/stack/stack-explorer";
 
 export function StackSection() {
   return (
@@ -28,19 +8,9 @@ export function StackSection() {
       <SectionHeading
         id="stack-title"
         eyebrow="Minha stack"
-        title={
-          <>
-            As ferramentas
-            <br />
-            por trás das entregas.
-          </>
-        }
+        title="Tecnologias que viram produto."
       />
-      <StaggerGroup className="stack-grid">
-        {stack.map((group) => (
-          <StackGroup key={group.title} group={group} />
-        ))}
-      </StaggerGroup>
+      <StackExplorer areas={stackAreas} applications={stackApplications} />
     </Section>
   );
 }
