@@ -5,7 +5,7 @@ import { profile } from "@/content/profile";
 import { Button } from "@/components/ui/primitives";
 import { Icon } from "@/components/ui/icon";
 
-export function CopyEmail() {
+export function CopyEmail({ label = "Copiar e-mail" }: { label?: string }) {
   const [message, setMessage] = useState("");
   const [copied, setCopied] = useState(false);
   const timer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
@@ -25,7 +25,7 @@ export function CopyEmail() {
   return (
     <div className="copy-email">
       <Button onClick={copyEmail}>
-        Copiar e-mail{" "}
+        {label}{" "}
         <span className="copy-feedback" key={String(copied)}>
           <Icon name={copied ? "check" : "copy"} />
         </span>

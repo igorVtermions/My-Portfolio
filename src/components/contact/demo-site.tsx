@@ -1,11 +1,11 @@
+import Link from "next/link";
+
 export function DemoSite({
   step,
   complete,
-  onContact,
 }: {
   step: number;
   complete: boolean;
-  onContact: () => void;
 }) {
   return (
     <div className="demo-site">
@@ -70,14 +70,13 @@ export function DemoSite({
         aria-hidden={step < 3}
       >
         <p>Vamos construir o seu próximo passo?</p>
-        <button
-          type="button"
+        <Link
+          href="/contato"
           className="demo-contact-button"
-          onClick={onContact}
-          disabled={!complete}
+          tabIndex={complete ? 0 : -1}
         >
-          Conversar sobre uma ideia <span aria-hidden="true">↗</span>
-        </button>
+          Entre em contato por outros canais <span aria-hidden="true">↗</span>
+        </Link>
       </div>
     </div>
   );

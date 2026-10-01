@@ -1,7 +1,7 @@
 export const profile = {
   name: "Igor Franco",
   fullName: "Igor Vinicius Pimentel Franco",
-  role: "Desenvolvedor Full Stack com foco em mobile",
+  role: "Desenvolvedor Full Stack",
   email: "igorviniciusf10@gmail.com",
   phone: "(21) 97488-5166",
   telephone: "tel:+5521974885166",
@@ -11,7 +11,7 @@ export const profile = {
   introduction:
     "React Native no aplicativo. React na web. Node.js no back-end. Sou desenvolvedor Full Stack e gosto de acompanhar o que construo até a entrega.",
   biography: [
-    "Meu foco é desenvolvimento mobile com React Native, mas meu trabalho também passa pela web, pelas APIs e pelos dados que conectam tudo.",
+    "Sou desenvolvedor Full Stack e gosto de construir soluções em toda a minha stack: interfaces web, aplicativos mobile, serviços, APIs e dados. Trabalho com front-end e back-end, acompanhando cada projeto do desenvolvimento à entrega.",
     "Atuo como freelancer desde 2023, ano em que concluí Análise e Desenvolvimento de Sistemas na Unopar. Na Thux/Mathux, participei de produtos web e mobile e assumi responsabilidade direta por entregas do time mobile, do desenvolvimento ao lançamento.",
     "Na Mágicos da Limpeza, colaboro na construção de aplicações para uma empresa em Portugal. Também desenvolvo o Escoply, meu SaaS para organizar a rotina de freelancers, atualmente em construção e testes com usuários convidados.",
   ],

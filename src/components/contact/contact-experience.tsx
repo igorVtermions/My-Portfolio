@@ -9,8 +9,16 @@ export function ContactExperience() {
 
   return (
     <div className="contact-composition">
-      <BuildAnimation paused={paused} onPauseChange={setPaused} />
-      <ContactForm onEngage={() => setPaused(true)} />
+      <BuildAnimation paused={paused} />
+      <div
+        onFocusCapture={() => setPaused(true)}
+        onBlurCapture={(event) => {
+          if (!event.currentTarget.contains(event.relatedTarget))
+            setPaused(false);
+        }}
+      >
+        <ContactForm />
+      </div>
     </div>
   );
 }

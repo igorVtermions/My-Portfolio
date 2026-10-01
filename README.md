@@ -1,6 +1,6 @@
 # Igor Franco | Portfólio
 
-Portfólio pessoal de **Igor Franco**, desenvolvedor Full Stack com foco em mobile. O projeto apresenta minha trajetória, minhas competências e minha participação em produtos web e mobile, reunindo casos de trabalho, repositórios públicos e canais de contato.
+Portfólio pessoal de **Igor Franco**, desenvolvedor Full Stack com atuação em web, mobile, front-end e back-end. O projeto apresenta minha trajetória, minhas competências e minha participação em produtos web e mobile, reunindo casos de trabalho, repositórios públicos e canais de contato.
 
 A aplicação foi desenvolvida com **Next.js, React e TypeScript**, a partir de um design próprio. A identidade visual combina preto, branco, roxo e lilás, fotografia real e uma composição que prioriza leitura, contexto dos projetos e navegação direta.
 
@@ -52,7 +52,7 @@ Os casos distinguem contexto, contribuição, tecnologias e estado atual. A foto
 - **Animações:** revelações de conteúdo e respostas de interação com suporte a movimento reduzido, além da faixa automática de tecnologias.
 - **Página 404:** tratamento de endereços e projetos inexistentes com retorno à home.
 
-O formulário da home envia mensagens pelo servidor usando Resend. Telefone e WhatsApp ficam na página dedicada de contato; foram removidos da home e do footer. O escopo não inclui autenticação, banco de dados ou CMS.
+O formulário da home envia mensagens pelo servidor usando Resend. A página `/contato` reúne assinatura pessoal, e-mail com ação de cópia, WhatsApp e ligação, além de LinkedIn e GitHub com ícones e indicação de finalidade. Telefone e WhatsApp foram removidos da home e do footer. O escopo não inclui autenticação, banco de dados ou CMS.
 
 ## Projetos apresentados
 
@@ -66,11 +66,11 @@ Thux/Mathux é apresentada como experiência profissional, não como um produto 
 
 ### Repositórios públicos
 
-| Repositório                                                       | Contexto                         | Linguagem apresentada |
-| ----------------------------------------------------------------- | -------------------------------- | --------------------- |
-| [escoply-web](https://github.com/igorVtermions/escoply-web)       | Frente web do produto autoral    | TypeScript            |
-| [escoply-mobile](https://github.com/igorVtermions/escoply-mobile) | Frente mobile do produto autoral | TypeScript            |
-| [nutritrack](https://github.com/igorVtermions/nutritrack) | MVP mobile com persistência local | TypeScript |
+| Repositório                                                       | Contexto                          | Linguagem apresentada |
+| ----------------------------------------------------------------- | --------------------------------- | --------------------- |
+| [escoply-web](https://github.com/igorVtermions/escoply-web)       | Frente web do produto autoral     | TypeScript            |
+| [escoply-mobile](https://github.com/igorVtermions/escoply-mobile) | Frente mobile do produto autoral  | TypeScript            |
+| [nutritrack](https://github.com/igorVtermions/nutritrack)         | MVP mobile com persistência local | TypeScript            |
 
 A home e a listagem consultam até 100 repositórios pela API pública do GitHub no servidor, com revalidação de uma hora. A seleção exibe até seis: destaque editorial primeiro, demais ordenados pelo último push. Repositórios privados, forks, arquivados, desabilitados e o README do perfil são excluídos. Trocar o projeto selecionado não faz requisições adicionais. Datas usam UTC, sem confundir push com autoria de commit ou release.
 
@@ -241,7 +241,7 @@ Experiências apresentam datas estruturadas em elementos `time` e contribuiçõe
 
 As animações usam Motion e CSS, com parâmetros compartilhados em [motion-tokens.ts](src/lib/motion-tokens.ts). O hook `useMotionPreference` usa um snapshot estável para servidor e hidratação. A faixa de tecnologias inicia automaticamente e suspende a reprodução fora da tela ou com a aba oculta. Experiências ficam sempre visíveis, com entrada suave e sem troca automática. Links de seção na página atual usam rolagem animada entre 650 e 1.200 ms, com desaceleração e cancelamento por interação manual. O conteúdo principal permanece legível sem JavaScript.
 
-A demonstração de contato digita código ilustrativo, aciona Run e monta uma landing page com a identidade de Igor. O visitante pode antecipar a execução, pausar ou repetir; o resultado permanece visível com um CTA que leva ao primeiro campo vazio do formulário. O preenchimento pausa a sequência, e repetir nunca apaga os dados. A reprodução também suspende fora da viewport e com aba oculta. Com movimento reduzido, a prévia é estática e oferece reprodução opcional. Sem JavaScript, a prévia e o link para contato continuam disponíveis. Não há execução real do trecho de código nem envio automático de e-mail.
+Contato interativo: ciclo automático de 30 segundos. Pausa na prévia por hover/foco, fora da viewport, com aba oculta e durante o preenchimento. O link Entre em contato por outros canais abre `/contato`. Sem JavaScript, prévia e link estáticos.
 
 ## Testes e validação
 
@@ -349,7 +349,7 @@ Na hospedagem, configure a versão do Node.js, o comando de build e a execução
 ## Autor e contato
 
 **Igor Vinicius Pimentel Franco**  
-Desenvolvedor Full Stack com foco em mobile.
+Desenvolvedor Full Stack com atuação em web, mobile, front-end e back-end.
 
 - **E-mail:** [igorviniciusf10@gmail.com](mailto:igorviniciusf10@gmail.com)
 - **Telefone:** [(21) 97488-5166](tel:+5521974885166)

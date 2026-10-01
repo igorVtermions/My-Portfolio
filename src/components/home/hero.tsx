@@ -23,7 +23,7 @@ export function Hero() {
           </h1>
           <div className="identity-note">
             <p>
-              Meu foco é mobile.
+              Web, mobile, front-end e back-end.
               <br />
               Meu trabalho conecta <strong>o produto inteiro.</strong>
             </p>

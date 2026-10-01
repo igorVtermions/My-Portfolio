@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import { profile } from "@/content/profile";
-import { ActionLink } from "@/components/ui/primitives";
-import { DirectContact } from "@/components/contact/direct-contact";
-import { CopyEmail } from "@/components/contact/copy-email";
-import { ContactMethods } from "@/components/contact/contact-methods";
+import { ContactChannels } from "@/components/contact/contact-channels";
+import { Reveal } from "@/components/motion/reveal";
 
 export const metadata: Metadata = {
   title: "Contato",
@@ -12,34 +10,42 @@ export const metadata: Metadata = {
 };
 export default function ContactPage() {
   return (
-    <section className="section contact-page">
-      <div className="page-title">
-        <p className="eyebrow">Vamos conversar</p>
-        <h1>
-          Me conta
-          <br />
-          <em>a sua ideia.</em>
-        </h1>
-        <p>
-          Um projeto, uma oportunidade ou uma troca sobre desenvolvimento. Pode
-          me chamar.
-        </p>
-      </div>
-      <a className="email" href={`mailto:${profile.email}`}>
-        {profile.email}
-      </a>
-      <div className="actions">
-        <ActionLink
-          href={`mailto:${profile.email}`}
-          icon="mail"
-          variant="primary"
-        >
-          Escrever um e-mail
-        </ActionLink>
-        <CopyEmail />
-      </div>
-      <DirectContact />
-      <ContactMethods />
+    <section
+      className="section contact-page contact-directory"
+      aria-labelledby="contact-page-title"
+    >
+      <Reveal className="contact-directory-intro">
+        <div>
+          <p className="eyebrow">Contato / Igor Franco</p>
+          <h1 id="contact-page-title">
+            Pode me
+            <br />
+            <em>chamar.</em>
+          </h1>
+          <p>
+            Para falar de um projeto, uma vaga ou trocar uma ideia sobre
+            desenvolvimento.
+          </p>
+        </div>
+        <div className="contact-signature">
+          <span className="contact-monogram" aria-hidden="true">
+            IF.
+          </span>
+          <div>
+            <span className="contact-signature-name">
+              {profile.name}
+              <b aria-hidden="true"> /</b>
+            </span>
+            <p>{profile.role}</p>
+            <span className="contact-signature-scope">
+              Web · Mobile · Front-end · Back-end
+            </span>
+          </div>
+        </div>
+      </Reveal>
+      <Reveal delay={0.08}>
+        <ContactChannels />
+      </Reveal>
     </section>
   );
 }

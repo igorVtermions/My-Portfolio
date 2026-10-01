@@ -17,6 +17,7 @@
 @import "../styles/repository-explorer.css";
 @import "../styles/stack-applied.css";
 @import "../styles/contact-demo.css";
+@import "../styles/contact-directory.css";
 
 * {
   box-sizing: border-box;

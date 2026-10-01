@@ -8,26 +8,28 @@ import { ContactSection } from "@/components/contact/contact-section";
 export const metadata: Metadata = {
   title: "Minha história",
   description:
-    "Conheça a trajetória de Igor Franco: formação em ADS, freelance desde 2023, desenvolvimento mobile e construção do Escoply.",
+    "Conheça a trajetória de Igor Franco: formação em ADS, freelance desde 2023, desenvolvimento Full Stack em web e mobile e construção do Escoply.",
 };
 export default function AboutPage() {
   return (
     <>
-      <section className="page-title">
-        <p className="eyebrow">Quem está por trás</p>
-        <h1>
-          Prazer,
-          <br />
-          <em>Igor Franco.</em>
-        </h1>
-      </section>
-      <section className="section about-lead">
-        <p>{profile.introduction}</p>
+      <section className="section about-lead" aria-labelledby="about-title">
+        <div className="about-introduction">
+          <div className="page-title">
+            <p className="eyebrow">Quem está por trás</p>
+            <h1 id="about-title">
+              Prazer,
+              <br />
+              <em>Igor Franco.</em>
+            </h1>
+          </div>
+          <p>{profile.introduction}</p>
+        </div>
         <Portrait priority />
       </section>
       <section className="section story">
         <h2>
-          Do freelance ao mobile.
+          Do freelance aos produtos Full Stack.
           <br />
           <em>E ao meu próprio produto.</em>
         </h2>

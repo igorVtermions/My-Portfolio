@@ -11,9 +11,6 @@ export function ContactSection() {
           <h2 id="contatos-title">
             Sua próxima ideia começa com uma conversa.
           </h2>
-          <a className="contact-skip" href="#contact-form">
-            Ir para o formulário ↗
-          </a>
         </div>
         <ContactExperience />
       </Reveal>

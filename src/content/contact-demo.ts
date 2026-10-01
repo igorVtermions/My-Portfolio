@@ -1,4 +1,9 @@
-export const demoTiming = { typing: 3600, run: 4500, complete: 6900 };
+export const demoTiming = {
+  typing: 10000,
+  run: 12000,
+  complete: 18000,
+  cycle: 30000,
+};
 
 export const demoCode = [
   { text: "export function SeuProximoSite() {\n", tone: "keyword" },

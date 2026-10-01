@@ -62,10 +62,6 @@ export function StackExplorer({
 
   return (
     <div className="stack-map">
-      <p className="stack-map-hint">
-        Selecione uma tecnologia com <span aria-hidden="true">↗</span> para ver
-        onde apliquei.
-      </p>
       {areas.map((area) => {
         const active =
           selection?.area === area.id ? selection.technology : null;
@@ -80,7 +76,7 @@ export function StackExplorer({
               <div className="stack-band-groups">
                 {area.groups.map((group) => (
                   <div className="stack-family" key={group.title}>
-                    {group.title !== area.title && <h4>{group.title}</h4>}
+                    <h4>{group.title}</h4>
                     <ul className="stack-tools">
                       {group.items.map((name) => (
                         <li key={name}>
@@ -172,7 +168,7 @@ export function StackExplorer({
         );
       })}
       <noscript>
-        <style>{`.stack-tools button, .stack-map-hint { display: none; }`}</style>
+        <style>{`.stack-tools button { display: none; }`}</style>
         <div className="stack-static-contexts">
           {Object.entries(applications).map(([name, application]) => (
             <article key={name}>

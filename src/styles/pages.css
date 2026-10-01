@@ -22,9 +22,16 @@
   display: grid;
   grid-template-columns: 1.4fr 1fr;
   gap: 50px;
-  align-items: center;
+  align-items: start;
 }
-.about-lead > p {
+.about-lead .page-title {
+  margin-top: 0;
+  margin-bottom: 24px;
+}
+.about-lead .page-title h1 {
+  margin-bottom: 0;
+}
+.about-introduction > p {
   font-size: 22px;
   max-width: 560px;
 }
@@ -109,7 +116,7 @@
     grid-template-columns: 1fr;
     gap: 25px;
   }
-  .about-lead > p {
+  .about-introduction > p {
     font-size: 19px;
   }
   .about-lead .portrait {

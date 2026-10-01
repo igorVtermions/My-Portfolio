@@ -107,7 +107,7 @@ test("clipboard informa sucesso e falha mantendo endereço acessível", async ({
       value: { writeText: async () => undefined },
     }),
   );
-  await page.getByRole("button", { name: "Copiar e-mail" }).click();
+  await page.getByRole("button", { name: "Copiar endereço" }).click();
   await expect(page.getByRole("status")).toHaveText("Endereço copiado.");
   await page.evaluate(() =>
     Object.defineProperty(navigator, "clipboard", {
@@ -119,7 +119,7 @@ test("clipboard informa sucesso e falha mantendo endereço acessível", async ({
       },
     }),
   );
-  await page.getByRole("button", { name: "Copiar e-mail" }).click();
+  await page.getByRole("button", { name: "Copiar endereço" }).click();
   await expect(page.getByRole("status")).toContainText(
     "Não foi possível copiar.",
   );

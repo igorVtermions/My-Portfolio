@@ -1,16 +1,9 @@
 .stack-map {
   margin-top: 32px;
 }
-.stack-map-hint {
-  font: 11px/1.7 var(--font-mono);
-  margin-bottom: 20px;
-}
-.stack-map-hint span {
-  color: var(--accent-soft);
-}
 .stack-band {
   display: grid;
-  grid-template-columns: minmax(160px, 0.3fr) minmax(0, 1fr);
+  grid-template-columns: minmax(160px, 0.25fr) minmax(0, 1fr);
   gap: 36px;
   padding: 30px 0;
   border-top: 1px solid var(--border);
@@ -28,22 +21,25 @@
   min-width: 0;
 }
 .stack-band-groups {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 24px 32px;
+  display: grid;
+  gap: 20px;
 }
 .stack-family {
-  flex: 1 1 240px;
+  display: grid;
+  grid-template-columns: 120px minmax(0, 1fr);
+  align-items: start;
+  gap: 16px;
   min-width: 0;
 }
 .stack-family h4 {
-  font: 10px/1.6 var(--font-mono);
+  font: 11px/1.6 var(--font-mono);
   color: var(--muted);
-  margin: 0 0 12px;
+  margin: 0;
+  padding-top: 14px;
 }
 .stack-tools {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   gap: 8px;
   list-style: none;
   padding: 0;
@@ -54,6 +50,8 @@
   align-items: center;
   gap: 9px;
   min-height: 46px;
+  width: 100%;
+  height: 100%;
   padding: 7px 10px;
   border: 1px solid transparent;
   border-radius: 6px;
@@ -77,6 +75,7 @@ button.stack-tool {
   transition: transform 240ms ease;
 }
 .stack-tool-arrow {
+  margin-left: auto;
   color: var(--accent-soft);
   font-size: 12px;
   transition: transform 240ms ease;
@@ -149,6 +148,13 @@ button.stack-tool:hover .stack-tool-arrow {
   border-top: 1px solid var(--border);
 }
 @media (max-width: 900px) {
+  .stack-family {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .stack-family h4 {
+    padding-top: 0;
+  }
   .stack-context {
     grid-template-columns: 1fr;
   }
@@ -170,8 +176,14 @@ button.stack-tool:hover .stack-tool-arrow {
   .stack-band-groups {
     gap: 22px;
   }
-  .stack-family {
-    flex-basis: 100%;
+  .stack-tools {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .stack-tool {
+    font-size: 12px;
+    padding: 8px;
+    gap: 7px;
+    overflow-wrap: anywhere;
   }
   .stack-context {
     padding: 22px 44px 22px 18px;

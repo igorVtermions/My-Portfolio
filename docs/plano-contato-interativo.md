@@ -1,5 +1,13 @@
 # Plano — Da ideia ao primeiro contato
 
+## Revisão de 1 de outubro de 2026
+
+Ajuste posterior: removido o botão Pausar/Continuar. A prévia concluída pausa enquanto houver mouse sobre a demonstração ou foco de teclado dentro dela, retomando ao sair. Hover durante digitação e construção não interrompe a sequência. O formulário pausa enquanto contém foco e libera a reprodução ao sair, evitando pausa permanente sem controle de retomada.
+
+Por solicitação do autor, a reprodução agora é automática, inclusive com preferência de movimento reduzido, em ciclos de 30 segundos: digitação até 10 s, Run em 12 s, montagem até 18 s e prévia até 30 s. A sequência reinicia, mas continua pausando durante preenchimento, fora da viewport ou com aba oculta. Os controles Ver/Rever animação e os textos abaixo da prévia foram removidos, assim como o link Ir para o formulário. O CTA agora é Entre em contato por outros canais e abre `/contato`. Esta revisão substitui os comportamentos de reprodução e CTA descritos na proposta original abaixo.
+
+Verificação local do envio: apenas `.env.example` está presente; `RESEND_API_KEY` e `CONTACT_FROM_EMAIL` não estão definidos no ambiente verificado. O envio real depende dessa configuração. Nenhum e-mail real foi disparado.
+
 Status: implementado após aprovação. Editor, Run e montagem progressiva substituem o loop decorativo anterior.
 
 Validação concluída: build, lint, TypeScript e formatação; sete testes de demonstração e formulário passaram. Cobertura inclui Run, reprodução automática, pausa, preservação dos campos, foco do CTA, movimento reduzido, acessibilidade, aba oculta, ausência de JavaScript e envio com respostas simuladas. Capturas de desktop, celular e editor revisadas em `docs/qa/contact-interactive-*.png`.

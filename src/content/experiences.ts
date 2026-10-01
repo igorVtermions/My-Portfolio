@@ -56,7 +56,7 @@ export const experiences: Experience[] = [
     name: "Thux / Mathux",
     href: "/experiencia/thux-mathux",
     role: "Software Engineer",
-    scope: "Full Stack · Foco em mobile",
+    scope: "Full Stack · Web, mobile e back-end",
     startDate: "2025-06",
     endDate: "2026-08",
     summary:

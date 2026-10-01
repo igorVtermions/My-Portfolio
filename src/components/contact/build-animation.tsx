@@ -1,26 +1,24 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { useInView } from "motion/react";
-import { useMotionPreference } from "@/components/motion/use-motion-preference";
 import { demoTiming } from "@/content/contact-demo";
 import { DemoEditor } from "./demo-editor";
 import { DemoSite } from "./demo-site";
 
-export function BuildAnimation({
-  paused,
-  onPauseChange,
-}: {
-  paused: boolean;
-  onPauseChange: (paused: boolean) => void;
-}) {
+const subscribe = () => () => {};
+const clientSnapshot = () => true;
+const serverSnapshot = () => false;
+
+export function BuildAnimation({ paused }: { paused: boolean }) {
   const ref = useRef<HTMLDivElement>(null);
   const visible = useInView(ref, { amount: 0.25 });
-  const reduced = useMotionPreference();
-  const [optedIn, setOptedIn] = useState(false);
+  const ready = useSyncExternalStore(subscribe, clientSnapshot, serverSnapshot);
   const [elapsed, setElapsed] = useState(0);
   const [pageVisible, setPageVisible] = useState(true);
-  const staticPreview = reduced && !optedIn;
+  const [hovered, setHovered] = useState(false);
+  const [focused, setFocused] = useState(false);
+  const staticPreview = !ready;
   const done = staticPreview || elapsed >= demoTiming.complete;
   const phase = done
     ? "complete"
@@ -29,10 +27,11 @@ export function BuildAnimation({
       : elapsed >= demoTiming.typing
         ? "ready"
         : "typing";
-  const running = visible && pageVisible && !paused && !done;
+  const holdingPreview = done && (hovered || focused);
+  const running = ready && visible && pageVisible && !paused && !holdingPreview;
   const step = done
     ? 4
-    : Math.max(0, Math.min(4, Math.floor((elapsed - demoTiming.run) / 500)));
+    : Math.max(0, Math.min(4, Math.floor((elapsed - demoTiming.run) / 1500)));
 
   useEffect(() => {
     const update = () => setPageVisible(!document.hidden);
@@ -43,58 +42,33 @@ export function BuildAnimation({
   useEffect(() => {
     if (!running) return;
     const timer = window.setInterval(
-      () => setElapsed((time) => Math.min(time + 60, demoTiming.complete)),
+      () => setElapsed((time) => (time + 60) % demoTiming.cycle),
       60,
     );
     return () => window.clearInterval(timer);
   }, [running]);
 
-  function replay() {
-    setOptedIn(true);
-    setElapsed(0);
-    onPauseChange(false);
-  }
   function run() {
     if (elapsed >= demoTiming.run) return;
     setElapsed(demoTiming.run);
-    onPauseChange(false);
   }
-  function contact() {
-    onPauseChange(true);
-    const form = document.getElementById("contact-form");
-    if (!form) return;
-    const fields = Array.from(
-      form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>(
-        "input[required], textarea[required]",
-      ),
-    );
-    const field =
-      fields.find((field) => !field.value.trim()) ??
-      form.querySelector<HTMLTextAreaElement>("textarea");
-    form.scrollIntoView({
-      behavior: reduced ? "instant" : "smooth",
-      block: "center",
-    });
-    field?.focus({ preventScroll: true });
-  }
-
-  const status =
-    phase === "typing"
-      ? "É assim que uma ideia começa."
-      : phase === "ready"
-        ? "Código pronto. Vamos dar vida?"
-        : phase === "building"
-          ? "Da estrutura aos detalhes."
-          : "Agora, vamos falar da sua ideia.";
-
   return (
     <div
       className="contact-demo"
       ref={ref}
       data-phase={phase}
       data-running={running}
-      data-paused={paused}
+      data-paused={paused || holdingPreview}
       data-step={step}
+      onPointerEnter={(event) => {
+        if (event.pointerType === "mouse") setHovered(true);
+      }}
+      onPointerLeave={() => setHovered(false)}
+      onFocusCapture={() => setFocused(true)}
+      onBlurCapture={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget))
+          setFocused(false);
+      }}
     >
       <p className="sr-only">
         Demonstração de código sendo escrito e transformado em um site. O
@@ -130,32 +104,12 @@ export function BuildAnimation({
             />
           )}
           {(phase === "building" || done) && (
-            <DemoSite step={step} complete={done} onContact={contact} />
+            <DemoSite step={step} complete={done} />
           )}
         </div>
       </div>
-      <div className="contact-demo-controls">
-        <p role="status">
-          {paused && !done ? "Demonstração pausada." : status}
-        </p>
-        <button
-          type="button"
-          onClick={done ? replay : () => onPauseChange(!paused)}
-        >
-          {done
-            ? staticPreview
-              ? "Ver animação"
-              : "Rever animação"
-            : paused
-              ? "Continuar"
-              : "Pausar"}
-        </button>
-      </div>
       <noscript>
-        <style>{`.contact-demo-controls, .demo-run, .demo-contact-button { display: none; }`}</style>
-        <a className="action" href="#contact-form">
-          Conversar sobre uma ideia ↗
-        </a>
+        <style>{`.demo-run { display: none; }`}</style>
       </noscript>
     </div>
   );

@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     template: "%s | Igor Franco",
   },
   description:
-    "Portfólio de Igor Franco. Desenvolvimento Full Stack com foco em mobile, React Native, aplicações web e APIs. Conheça os projetos e a trajetória.",
+    "Portfólio de Igor Franco. Desenvolvimento Full Stack: aplicações web e mobile, front-end, back-end e APIs. Conheça os projetos e a trajetória.",
   openGraph: {
     title: "Igor Franco | Desenvolvedor Full Stack",
     description: profile.role,
